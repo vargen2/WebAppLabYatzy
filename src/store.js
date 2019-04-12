@@ -13,7 +13,7 @@ export default new Vuex.Store({
   },
   mutations: {
     initGame (state) {
-      state.dices=[{side:1,locked:false},{side:1,locked:false},{side:1,locked:false},{side:1,locked:false},{side:1,locked:false}]
+      state.dices=[{side:1,isInteractive:false,locked:false},{side:1,isInteractive:false,locked:false},{side:1,isInteractive:false,locked:false},{side:1,isInteractive:false,locked:false},{side:1,isInteractive:false,locked:false}]
       state.upperScores=[
         {name:'Aces',description:'Any combination',score:'The sum of dice with the number 1',dices:[]},
         {name:'Twos',description:'Any combination',score:'The sum of dice with the number 2',dices:[]},
@@ -41,6 +41,7 @@ export default new Vuex.Store({
         return
       }
       for (let i = 0; i < state.dices.length; i++) {
+        state.dices[i].isInteractive=true
         if (!state.dices[i].locked) {
           state.dices[i].side=Math.floor(Math.random()*6+1) 
         }        
@@ -51,6 +52,7 @@ export default new Vuex.Store({
       if (state.rollRound===0) {
         return
       }
+      console.log("hit: "+index)
       state.dices[index].locked = !state.dices[index].locked 
     },
     resetRound(state) {
@@ -61,6 +63,7 @@ export default new Vuex.Store({
       state.gameRound++
       for (const dice of state.dices) {
         dice.locked=false
+        dice.isInteractive=false
       }
     },
     selectUpperScore (state, index) {

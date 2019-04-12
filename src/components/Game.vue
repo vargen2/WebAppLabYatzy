@@ -3,18 +3,12 @@
     <div>Game Round: {{gameRound}}</div>
     <div>Roll Round: {{rollRound}}</div>
     <div class="dicerow">
-      <div
-        class="dice"
+      <dice
         v-for="(dice, index) in dices"
         v-bind:key="index"
-        v-on:click="lockDice(index)"
-        v-bind:class="{ avoidclicks: isNotLockable }"
-      >
-        <div v-if="rollRound != 0">
-          {{dice.side}}
-          <span v-if="dice.locked">locked</span>
-        </div>
-      </div>
+        v-on:dice-click="lockDice(index)"
+        v-bind:dice="dice"
+      ></dice>
     </div>
     <button @click="roll">Roll</button>
     <div class="scoresheet">
@@ -49,14 +43,15 @@
 </template>
 
 <script>
+import Dice from "./Dice.vue";
 export default {
   name: "Game",
+  components: {
+    Dice
+  },
   computed: {
     dices: function() {
       return this.$store.state.dices;
-    },
-    isNotLockable() {
-      return this.$store.state.rollRound === 0;
     },
     gameRound: function() {
       return this.$store.state.gameRound;
@@ -100,13 +95,6 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-bottom: 2em;
-}
-
-.dice {
-  height: 3em;
-  width: 3em;
-  background-color: #42b983;
-  cursor: pointer;
 }
 
 .avoidclicks {
