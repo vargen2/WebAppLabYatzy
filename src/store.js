@@ -52,7 +52,6 @@ export default new Vuex.Store({
       if (state.rollRound===0) {
         return
       }
-      console.log("hit: "+index)
       state.dices[index].locked = !state.dices[index].locked 
     },
     resetRound(state) {
@@ -70,14 +69,14 @@ export default new Vuex.Store({
       if (state.rollRound ==0 || state.upperScores[index].dices.length>0) {
          return
       }  
-      state.upperScores[index].dices=state.dices.map(d=>d.side)      
+      state.upperScores[index].dices=state.dices.map(d=>{return {side:d.side,isInteractive:false,locked:false}})      
       this.commit('resetRound')
     },
     selectLowerScore (state, index) {
       if (state.rollRound ==0 || state.lowerScores[index].dices.length>0) {
          return
       }  
-            state.lowerScores[index].dices=state.dices.map(d=>d.side)      
+            state.lowerScores[index].dices=state.dices.map(d=>{return {side:d.side,isInteractive:false,locked:false}})      
             this.commit('resetRound')
     }
   },

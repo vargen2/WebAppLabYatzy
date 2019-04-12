@@ -13,29 +13,25 @@
     <button @click="roll">Roll</button>
     <div class="scoresheet">
       <div class="scoresection">
-        <div
-          class="scoringbox"
+        <score-category
           v-for="(score, index) in upperScores"
           v-bind:key="index"
-          v-on:click="selectUpperScore(index)"
-          v-bind:class="{avoidclicks: score.dices.length>0}"
+          v-on:score-click="selectUpperScore(index)"
+          v-bind:score="score"
+          v-bind:class="{ avoidclicks: rollRound==0 }"
         >
-          {{score.name}}
-          {{score.dices}}
-        </div>
+        </score-category>
         <div class="scoringbox avoidclicks">Bonus</div>
       </div>
       <div class="scoresection">
-        <div
-          class="scoringbox"
+        <score-category
           v-for="(score, index) in lowerScores"
           v-bind:key="index"
-          v-on:click="selectLowerScore(index)"
-          v-bind:class="{avoidclicks: score.dices.length>0}"
+          v-on:score-click="selectLowerScore(index)"
+          v-bind:score="score"
+          v-bind:class="{ avoidclicks: rollRound==0 }"
         >
-          {{score.name}}
-          {{score.dices}}
-        </div>
+        </score-category>
       </div>
     </div>
     <div class="totalbox">Total:</div>
@@ -44,10 +40,12 @@
 
 <script>
 import Dice from "./Dice.vue";
+import ScoreCategory from "./ScoreCategory.vue";
 export default {
   name: "Game",
   components: {
-    Dice
+    Dice,
+    ScoreCategory
   },
   computed: {
     dices: function() {
@@ -114,14 +112,6 @@ export default {
   display: flex;
   flex-direction: column;
   width: 45%;
-}
-
-.scoringbox {
-  background-color: #42b983;
-  width: 100%;
-  height: 3em;
-  cursor: pointer;
-  margin-bottom: 4px;
 }
 
 .totalbox {
