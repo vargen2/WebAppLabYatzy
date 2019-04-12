@@ -7,16 +7,16 @@
     <div class="left">
       <div class="title">{{score.name}}</div>
 
-      <div class="dicerow" v-if="score.dices.length>0">
+      <div class="dicerow" >
         <dice
           class="small-dice"
           v-for="(dice, index) in score.dices"
           v-bind:key="index"
           v-bind:dice="dice"
         ></dice>
+        {{points}}
       </div>
     </div>
-   
   </div>
 </template>
 
@@ -26,6 +26,14 @@ export default {
   name: "ScoreCategory",
   props: {
     score: Object
+  },
+  computed: {
+    points: function() {
+      if (!this.score.scoreFunc) {
+        return 0;
+      }
+      return this.score.scoreFunc(this.score.dices);
+    }
   },
   components: {
     Dice
@@ -45,7 +53,7 @@ export default {
 
 .points {
   width: 3em;
-  background-color:rgb(161, 161, 161);
+  background-color: rgb(161, 161, 161);
 }
 
 .left {
@@ -58,7 +66,7 @@ export default {
   text-align: left;
   background-color: rgb(73, 73, 73);
   padding-left: 0.2em;
-  color: rgb(233,233,233);
+  color: rgb(233, 233, 233);
 }
 
 .dicerow {
