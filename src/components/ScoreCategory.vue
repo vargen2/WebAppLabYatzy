@@ -7,7 +7,7 @@
     <div class="left">
       <div class="title">{{score.name}}</div>
 
-      <div class="dicerow">
+      <div class="dicerow" v-if="score.dices.length>0">
         <dice
           class="small-dice"
           v-for="(dice, index) in score.dices"
@@ -16,9 +16,7 @@
         ></dice>
       </div>
     </div>
-    <div class="points">
-
-    </div>
+   
   </div>
 </template>
 
@@ -37,17 +35,17 @@ export default {
 
 <style scoped>
 .scorecategory {
-  background-color:  rgb(197, 169, 169);
+  background-color: rgb(160, 199, 155);
   width: 100%;
   height: 3em;
   cursor: pointer;
-  margin-bottom: 0px;
+  margin-bottom: 4px;
   display: flex;
 }
 
 .points {
   width: 3em;
-  background-color: rgb(68, 68, 68);
+  background-color:rgb(161, 161, 161);
 }
 
 .left {
@@ -58,8 +56,9 @@ export default {
 
 .title {
   text-align: left;
-  background-color: #CF9878;
-  margin-left: 0.2em;
+  background-color: rgb(73, 73, 73);
+  padding-left: 0.2em;
+  color: rgb(233,233,233);
 }
 
 .dicerow {

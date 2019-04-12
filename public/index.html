@@ -18,13 +18,16 @@
 
   header {
     height: 50px;
-    background: #CF9878;
+    background: rgb(73, 73, 73);
     text-align: center;
+    color: rgb(233, 233, 233);
   }
 
   footer {
     height: 50px;
-    background: rgb(197, 169, 169);
+    background: rgb(202, 202, 202);
+    display: flex;
+    flex-wrap: wrap;
   }
 
   /* Trick */
@@ -35,7 +38,33 @@
 
   footer {
     margin-top: auto;
+    
   }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+  
+  }
+
+  
+  
+  @media screen and (min-width: 550px) {
+  .column {
+    flex: 1;
+  }
+}
 </style>
 
 <body>
@@ -43,13 +72,19 @@
     <strong>We're sorry but lab2v2 doesn't work properly without JavaScript enabled. Please enable it to
       continue.</strong>
   </noscript>
-  <header>
+  <!-- <header>
     <h3>Game</h3>
-  </header>
+  </header> -->
   <div id="app"></div>
   <footer>
-    <a href="https://en.wikipedia.org/wiki/Yahtzee" target="_blank"
-      rel="noopener noreferrer">https://en.wikipedia.org/wiki/Yahtzee</a>
+    <div class="row">
+      <div class="column">
+         <div>Help: <a href="https://en.wikipedia.org/wiki/Yahtzee" target="_blank"
+          rel="noopener noreferrer">https://en.wikipedia.org/wiki/Yahtzee</a>
+        </div> 
+      </div>
+      <div class="column">Author: Hjalmar arnell</div>
+    </div>
   </footer>
 </body>
 

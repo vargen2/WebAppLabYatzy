@@ -2,39 +2,50 @@
   <div class="game">
     <div>Game Round: {{gameRound}}</div>
     <div>Roll Round: {{rollRound}}</div>
-    <div class="dicerow">
-      <dice
-        v-for="(dice, index) in dices"
-        v-bind:key="index"
-        v-on:dice-click="lockDice(index)"
-        v-bind:dice="dice"
-      ></dice>
+    <div class="row">
+      <div class="column">
+        <div class="dicerow">
+          <dice
+            v-for="(dice, index) in dices"
+            v-bind:key="index"
+            v-on:dice-click="lockDice(index)"
+            v-bind:dice="dice"
+          ></dice>
+        </div>
+      </div>
     </div>
-    <button @click="roll">Roll</button>
-    <div class="scoresheet">
-      <div class="scoresection">
+    <div class="row">
+      <div class="column">
+        <button class="roll-button" @click="roll">Roll</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
         <score-category
           v-for="(score, index) in upperScores"
           v-bind:key="index"
           v-on:score-click="selectUpperScore(index)"
           v-bind:score="score"
           v-bind:class="{ avoidclicks: rollRound==0 }"
-        >
-        </score-category>
-        <div class="scoringbox avoidclicks">Bonus</div>
+        ></score-category>
       </div>
-      <div class="scoresection">
+      <div class="column">
         <score-category
           v-for="(score, index) in lowerScores"
           v-bind:key="index"
           v-on:score-click="selectLowerScore(index)"
           v-bind:score="score"
           v-bind:class="{ avoidclicks: rollRound==0 }"
-        >
-        </score-category>
+        ></score-category>
       </div>
     </div>
-    <div class="totalbox">Total:</div>
+
+    <div class="row">
+      <div class="column">
+        <score-category class="avoidclicks" v-bind:score="totalScore"></score-category>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -62,6 +73,9 @@ export default {
     },
     lowerScores: function() {
       return this.$store.state.lowerScores;
+    },
+    totalScore: function() {
+      return this.$store.state.totalScore;
     }
   },
   methods: {
@@ -82,42 +96,24 @@ export default {
 </script>
 
 <style scoped>
+.roll-button {
+  background-color: rgb(160, 199, 155);
+  border: 2px solid rgb(73, 73, 73);
+}
+
 .game {
   display: flex;
   flex-direction: column;
-  margin-left: 2em;
-  margin-right: 2em;
+  margin-left: 0em;
+  margin-right: 0em;
 }
 
 .dicerow {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2em;
 }
 
 .avoidclicks {
   pointer-events: none;
-}
-
-.scoresheet {
-  margin-top: 2em;
-  margin-bottom: 2em;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  align-items: center;
-}
-
-.scoresection {
-  display: flex;
-  flex-direction: column;
-  width: 45%;
-}
-
-.totalbox {
-  display: inline-block;
-  border: 1px solid #000;
-  height: 3em;
-  margin-bottom: 2em;
 }
 </style>

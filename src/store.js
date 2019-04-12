@@ -8,6 +8,7 @@ export default new Vuex.Store({
     dices: [],
     upperScores: [],
     lowerScores: [],
+    totalScore: Object,
     gameRound: Number,
     rollRound: Number
   },
@@ -20,8 +21,8 @@ export default new Vuex.Store({
         {name:'Threes',description:'Any combination',score:'The sum of dice with the number 3',dices:[]},
         {name:'Fours',description:'Any combination',score:'The sum of dice with the number 4',dices:[]},
         {name:'Fives',description:'Any combination',score:'The sum of dice with the number 5',dices:[]},
-        {name:'Sixes',description:'Any combination',score:'The sum of dice with the number 6',dices:[]}
-
+        {name:'Sixes',description:'Any combination',score:'The sum of dice with the number 6',dices:[]},
+        {name:'Bonus',description:'Any combination',score:'The sum of dice with the number 6',dices:[]}
       ]
       state.lowerScores=[
         {name:'Three Of A Kind',description:'Any combination',score:'The sum of dice with the number 1',dices:[]},
@@ -33,6 +34,7 @@ export default new Vuex.Store({
         {name:'Chance',description:'Any combination',score:'The sum of dice with the number 1',dices:[]}
 
       ]
+      state.totalScore={name:'Total',description:'Any combination',score:'The sum of dice with the number 6',dices:[]}
       state.gameRound=0
       state.rollRound=0
     },
