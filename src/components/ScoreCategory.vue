@@ -19,6 +19,7 @@
         <div class="points">{{points}}</div>
       </div>
     </div>
+    <span class="tooltiptext">{{score.description}}</span>
   </div>
 </template>
 
@@ -93,5 +94,27 @@ export default {
 
 .avoidclicks {
   pointer-events: none;
+}
+
+
+
+/* Tooltip text */
+.tooltiptext {
+  visibility: hidden;
+  /* width: 120px; */
+  background-color: rgb(233, 233, 233);
+  color: rgb(73, 73, 73);
+  text-align: center;
+  padding: 5px 0;
+  /* border-radius: 6px; */
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.scorecategory:hover .tooltiptext {
+  visibility: visible;
 }
 </style>

@@ -98,7 +98,9 @@ export default {
 <style scoped>
 .roll-button {
   background-color: rgb(160, 199, 155);
-  border: 2px solid rgb(73, 73, 73);
+  border: 0px;
+  border-top: 4px solid rgb(73, 73, 73);
+  font-size: 1.5em;
 }
 
 .game {
@@ -111,6 +113,7 @@ export default {
 .dicerow {
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 1em;
 }
 
 .avoidclicks {
