@@ -7,14 +7,16 @@
     <div class="left">
       <div class="title">{{score.name}}</div>
 
-      <div class="dicerow" >
-        <dice
-          class="small-dice"
-          v-for="(dice, index) in score.dices"
-          v-bind:key="index"
-          v-bind:dice="dice"
-        ></dice>
-        {{points}}
+      <div class="content">
+        <div class="dicerow">
+          <dice
+            class="small-dice"
+            v-for="(dice, index) in score.dices"
+            v-bind:key="index"
+            v-bind:dice="dice"
+          ></dice>
+        </div>
+        <div class="points">{{points}}</div>
       </div>
     </div>
   </div>
@@ -51,10 +53,7 @@ export default {
   display: flex;
 }
 
-.points {
-  width: 3em;
-  background-color: rgb(161, 161, 161);
-}
+
 
 .left {
   display: flex;
@@ -69,10 +68,21 @@ export default {
   color: rgb(233, 233, 233);
 }
 
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.1em;
+}
+
 .dicerow {
   display: flex;
   justify-content: center;
-  margin: 0.1em;
+  flex: 1;
+}
+
+.points {
+  width: 2em;
+  /* background-color: rgb(161, 161, 161); */
 }
 
 .small-dice {

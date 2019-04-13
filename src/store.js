@@ -59,12 +59,67 @@ export default new Vuex.Store({
           }
           return 0
         }},
-        {name:'Small Straight',description:'Four sequential dice (1-2-3-4, 2-3-4-5, or 3-4-5-6)',score:'30',dices:[]},
-        {name:'Large Straight',description:'Five sequential dice (1-2-3-4-5 or 2-3-4-5-6)',score:'40',dices:[]},
-        {name:'Yahtzee',description:'All five dice the same',score:'50',dices:[]},
-        {name:'Chance',description:'Any combination',score:'Sum of all dice',dices:[]}
+        {name:'Small Straight',description:'Four sequential dice (1-2-3-4, 2-3-4-5, or 3-4-5-6)',score:'30',dices:[],scoreFunc: (arr)=> {
+          if(arr.length==0){
+            return 0
+          }
+          let sides=[false,false,false,false,false,false]
+          for (const dice of arr) {
+            sides[dice.side-1]=true
+          }
+          if(sides[0]&&sides[1]&&sides[2]&&sides[3]){
+            return 30
+          }
+          if(sides[1]&&sides[2]&&sides[3]&&sides[4]){
+            return 30
+          }
+          if(sides[2]&&sides[3]&&sides[4]&&sides[5]){
+            return 30
+          }
+          return 0
+        }},
+        {name:'Large Straight',description:'Five sequential dice (1-2-3-4-5 or 2-3-4-5-6)',score:'40',dices:[],scoreFunc: (arr)=> {
+          if(arr.length==0){
+            return 0
+          }
+          let sides=[false,false,false,false,false,false]
+          for (const dice of arr) {
+            sides[dice.side-1]=true
+          }
+          if(sides[0]&&sides[1]&&sides[2]&&sides[3]&&sides[4]){
+            return 40
+          }
+          if(sides[1]&&sides[2]&&sides[3]&&sides[4]&&sides[5]){
+            return 40
+          }
+          return 0
+        }},
+        {name:'Yahtzee',description:'All five dice the same',score:'50',dices:[],scoreFunc: (arr)=> {
+          if(arr.length==0){
+            return 0
+          }
+          let first=arr[0].side
+          for (const dice of arr) {
+            if(first != dice.side){
+              return 0
+            }
+          }
+          return 50
+        }
+      },
+        {name:'Chance',description:'Any combination',score:'Sum of all dice',dices:[],scoreFunc: arr=> arr.map(d=>d.side).reduce((a,b) => a + b, 0)}
       ]
-      state.totalScore={name:'Total',description:'Any combination',score:'The sum of dice with the number 6',dices:[]}
+      state.totalScore={name:'Total',description:'Any combination',score:'The sum of dice with the number 6',dices:[],scoreFunc: ()=> {
+        let sum=0;
+        for (const score of state.upperScores) {
+          sum+=score.scoreFunc(score.dices)
+        }
+        for (const score of state.lowerScores) {
+          sum+=score.scoreFunc(score.dices)
+        }
+
+        return sum
+      }}
       state.gameRound=0
       state.rollRound=0
     },
