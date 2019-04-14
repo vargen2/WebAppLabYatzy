@@ -12,7 +12,7 @@ export default {
   components: {
     Game
   },
-  mounted: function() {
+  created: function() {
     this.$store.commit("initGame");
   }
 };

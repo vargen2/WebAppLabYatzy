@@ -1,7 +1,7 @@
 <template>
   <div
-    class="scorecategory"
-    v-bind:class="{ avoidclicks: score.dices && score.dices.length>0 || !valid }"
+    class="scorecategory"   
+   v-bind:class="{avoidclicks : score.dices.length >0|| !valid}"
     v-on:click="$emit('score-click')"
   >
     <div class="left">
@@ -9,6 +9,7 @@
 
       <div class="content">
         <div class="dicerow">
+          <span v-if="showDesc && score.dices.length==0">{{score.description}}</span>
           <dice
             class="small-dice"
             v-for="(dice, index) in score.dices"
@@ -23,7 +24,6 @@
         
       </div>
     </div>
-    <span class="tooltiptext">{{score.description}}</span>
   </div>
 </template>
 
@@ -32,7 +32,8 @@ import Dice from "./Dice.vue";
 export default {
   name: "ScoreCategory",
   props: {
-    score: Object
+    score: Object,
+    showDesc: Boolean
   },
   computed: {
     points: function() {
@@ -97,12 +98,18 @@ export default {
 .points {
   width: 2em;
   /* background-color: rgb(161, 161, 161); */
+  color:rgb(73, 73, 73);
+  font-size: 1.7em;
+  font-weight: bold;
 }
 
 .suggestedPoints {
   width: 2em;
-  font-size: 2em;
-  color: green;
+  font-size: 1.7em;
+  font-weight: bold;
+  text-decoration-style: dotted;
+  text-decoration-line: underline;
+  color: rgb(49, 107, 64);
 }
 
 .small-dice {
@@ -115,25 +122,4 @@ export default {
   pointer-events: none;
 }
 
-
-
-/* Tooltip text */
-.tooltiptext {
-  visibility: hidden;
-  /* width: 120px; */
-  background-color: rgb(233, 233, 233);
-  color: rgb(73, 73, 73);
-  text-align: center;
-  padding: 5px 0;
-  /* border-radius: 6px; */
- 
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  z-index: 1;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.scorecategory:hover .tooltiptext {
-  visibility: visible;
-}
 </style>

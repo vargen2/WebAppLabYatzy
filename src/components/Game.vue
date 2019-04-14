@@ -1,7 +1,17 @@
 <template>
   <div class="game">
-    <div>Game Round: {{gameRound}}</div>
-    <div>Roll Round: {{rollRound}}</div>
+    <div class="row">
+      <div class="column">
+        <div>Game Round: {{gameRound}}</div>
+        <div>Roll Round: {{rollRound}}</div>
+      </div>
+      <div class="column">
+        <div>
+          <input type="checkbox" id="checkbox" v-model="showDesc">
+          <label for="checkbox">Show descriptions</label>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="column">
         <div class="dicerow">
@@ -28,6 +38,7 @@
           v-on:score-click="selectUpperScore(index)"
           v-bind:score="score"
           v-bind:class="{ avoidclicks: rollRound==0 }"
+          v-bind:showDesc="showDesc"
         ></score-category>
       </div>
       <div class="column">
@@ -37,6 +48,7 @@
           v-on:score-click="selectLowerScore(index)"
           v-bind:score="score"
           v-bind:class="{ avoidclicks: rollRound==0 }"
+          v-bind:showDesc="showDesc"
         ></score-category>
       </div>
     </div>
@@ -76,6 +88,14 @@ export default {
     },
     totalScore: function() {
       return this.$store.state.totalScore;
+    },
+    showDesc: {
+      set() {
+        this.$store.commit("showDesc");
+      },
+      get() {
+        return this.$store.state.showDesc;
+      }
     }
   },
   methods: {
