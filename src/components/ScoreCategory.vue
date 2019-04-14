@@ -1,7 +1,7 @@
 <template>
   <div
     class="scorecategory"
-    v-bind:class="{ avoidclicks: score.dices.length>0 }"
+    v-bind:class="{ avoidclicks: score.dices && score.dices.length>0 || !valid }"
     v-on:click="$emit('score-click')"
   >
     <div class="left">
@@ -16,7 +16,11 @@
             v-bind:dice="dice"
           ></dice>
         </div>
-        <div class="points">{{points}}</div>
+        <div class="points" v-if=" (score.dices && score.dices.length>0) ||points>0">{{points}}</div>
+        <div class="suggestedPoints" v-else-if="valid">
+          {{suggestedPoints}}
+        </div>
+        
       </div>
     </div>
     <span class="tooltiptext">{{score.description}}</span>
@@ -32,10 +36,19 @@ export default {
   },
   computed: {
     points: function() {
-      if (!this.score.scoreFunc) {
+       if (!this.score.dices) {
+         return 0;
+       }
+      return this.score.rule.points(this.score.dices);
+    },
+    suggestedPoints: function() {
+      if (!this.score.rule) {
         return 0;
       }
-      return this.score.scoreFunc(this.score.dices);
+      return this.score.rule.points(this.$store.state.dices);
+    },
+    valid: function(){
+      return this.$store.state.rollRound > 0 && this.score.rule.validator(this.$store.state.dices)
     }
   },
   components: {
@@ -84,6 +97,12 @@ export default {
 .points {
   width: 2em;
   /* background-color: rgb(161, 161, 161); */
+}
+
+.suggestedPoints {
+  width: 2em;
+  font-size: 2em;
+  color: green;
 }
 
 .small-dice {
