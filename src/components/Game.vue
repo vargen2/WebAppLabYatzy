@@ -62,57 +62,58 @@
 </template>
 
 <script>
-import Dice from "./Dice.vue";
-import ScoreCategory from "./ScoreCategory.vue";
+import Dice from './Dice.vue'
+import ScoreCategory from './ScoreCategory.vue'
 export default {
-  name: "Game",
+  name: 'Game',
   components: {
     Dice,
     ScoreCategory
   },
   computed: {
-    dices: function() {
-      return this.$store.state.dices;
+    dices: function () {
+      return this.$store.state.dices
     },
-    gameRound: function() {
-      return this.$store.state.gameRound;
+    gameRound: function () {
+      return this.$store.state.gameRound
     },
-    rollRound: function() {
-      return this.$store.state.rollRound;
+    rollRound: function () {
+      return this.$store.state.rollRound
     },
-    upperScores: function() {
-      return this.$store.state.upperScores;
+    upperScores: function () {
+      return this.$store.state.upperScores
     },
-    lowerScores: function() {
-      return this.$store.state.lowerScores;
+    lowerScores: function () {
+      return this.$store.state.lowerScores
     },
-    totalScore: function() {
-      return this.$store.state.totalScore;
+    totalScore: function () {
+      return this.$store.state.totalScore
     },
     showDesc: {
-      set() {
-        this.$store.commit("showDesc");
+      set () {
+        this.$store.commit('showDesc')
       },
-      get() {
-        return this.$store.state.showDesc;
+      get () {
+        return this.$store.state.showDesc
       }
     }
   },
   methods: {
-    roll: function() {
-      this.$store.dispatch("roll");
+    roll: function () {
+      this.$store.dispatch('roll')
     },
-    lockDice: function(index) {
-      this.$store.dispatch("lockDice", index);
+    lockDice: function (index) {
+      this.$store.dispatch('lockDice', index)
     },
-    selectUpperScore: function(index) {
-      this.$store.dispatch("selectUpperScore", index);
+    selectUpperScore: function (index) {
+      this.$store.dispatch('selectUpperScore', index)
     },
-    selectLowerScore: function(index) {
-      this.$store.dispatch("selectLowerScore", index);
+    selectLowerScore: function (index) {
+      this.$store.dispatch('selectLowerScore', index)
     }
   }
-};
+}
+
 </script>
 
 <style scoped>

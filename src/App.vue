@@ -5,17 +5,18 @@
 </template>
 
 <script>
-import Game from "./components/Game.vue";
+import Game from './components/Game.vue'
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Game
   },
-  created: function() {
-    this.$store.commit("initGame");
+  created: function () {
+    this.$store.commit('initGame')
   }
-};
+}
+
 </script>
 
 <style>

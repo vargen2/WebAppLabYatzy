@@ -7,16 +7,17 @@
 
 <script>
 export default {
-  name: "Dice",
+  name: 'Dice',
   props: {
     dice: Object
   },
   computed: {
-  image: function () {
-    return require('@/assets/Dice-'+this.dice.side+'.svg')
+    image: function () {
+      return require('@/assets/Dice-' + this.dice.side + '.svg')
+    }
   }
 }
-};
+
 </script>
 
 <style scoped>

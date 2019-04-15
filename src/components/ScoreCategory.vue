@@ -1,7 +1,7 @@
 <template>
   <div
-    class="scorecategory"   
-   v-bind:class="{avoidclicks : score.dices.length >0|| !valid}"
+    class="scorecategory"
+    v-bind:class="{avoidclicks : score.dices.length >0|| !valid}"
     v-on:click="$emit('score-click')"
   >
     <div class="left">
@@ -18,44 +18,44 @@
           ></dice>
         </div>
         <div class="points" v-if=" (score.dices && score.dices.length>0) ||points>0">{{points}}</div>
-        <div class="suggestedPoints" v-else-if="valid">
-          {{suggestedPoints}}
-        </div>
-        
+        <div class="suggestedPoints" v-else-if="valid">{{suggestedPoints}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Dice from "./Dice.vue";
+import Dice from './Dice.vue'
 export default {
-  name: "ScoreCategory",
+  name: 'ScoreCategory',
   props: {
     score: Object,
     showDesc: Boolean
   },
   computed: {
-    points: function() {
-       if (!this.score.dices) {
-         return 0;
-       }
-      return this.score.rule.points(this.score.dices);
-    },
-    suggestedPoints: function() {
-      if (!this.score.rule) {
-        return 0;
+    points: function () {
+      if (!this.score.dices) {
+        return 0
       }
-      return this.score.rule.points(this.$store.state.dices);
+      return this.score.rule.points(this.score.dices)
     },
-    valid: function(){
-      return this.$store.state.rollRound > 0 && this.score.rule.validator(this.$store.state.dices)
+    suggestedPoints: function () {
+      if (!this.score.rule) {
+        return 0
+      }
+      return this.score.rule.points(this.$store.state.dices)
+    },
+    valid: function () {
+      return (
+        this.$store.state.rollRound > 0 &&
+        this.score.rule.validator(this.$store.state.dices)
+      )
     }
   },
   components: {
     Dice
   }
-};
+}
 </script>
 
 <style scoped>
@@ -67,8 +67,6 @@ export default {
   margin-bottom: 4px;
   display: flex;
 }
-
-
 
 .left {
   display: flex;
@@ -98,7 +96,7 @@ export default {
 .points {
   width: 2em;
   /* background-color: rgb(161, 161, 161); */
-  color:rgb(73, 73, 73);
+  color: rgb(73, 73, 73);
   font-size: 1.7em;
   font-weight: bold;
 }
