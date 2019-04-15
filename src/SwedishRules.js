@@ -243,6 +243,80 @@ const fourOfAKind = {
   points: fourOfAKindPoints
 }
 
+const onePairValidator = function (arr) {
+  let sides = [0, 0, 0, 0, 0, 0]
+  for (const dice of arr) {
+    sides[dice.side - 1]++
+  }
+
+  for (const side of sides) {
+    if (side >= 2) {
+      return true
+    }
+  }
+  return false
+}
+
+const onePairPoints = function (arr) {
+  if (onePairValidator(arr)) {
+    let sides = [0, 0, 0, 0, 0, 0]
+    for (const dice of arr) {
+      sides[dice.side - 1]++
+    }
+    var maxPair = 0
+    for (var i = 0; i < sides.length; i++) {
+      if (sides[i] >= 2) {
+        maxPair = Math.max(maxPair, (i + 1) * 2)
+      }
+    }
+    return maxPair
+  }
+  return 0
+}
+
+const onePair = {
+  maxPoints: 12,
+  validator: onePairValidator,
+  points: onePairPoints
+}
+
+const twoPairsValidator = function (arr) {
+  let sides = [0, 0, 0, 0, 0, 0]
+  for (const dice of arr) {
+    sides[dice.side - 1]++
+  }
+  var count = 0
+  for (const side of sides) {
+    if (side >= 2) {
+      count++
+    }
+  }
+  return count === 2
+}
+
+const twoPairsPoints = function (arr) {
+  if (twoPairsValidator(arr)) {
+    let sides = [0, 0, 0, 0, 0, 0]
+    for (const dice of arr) {
+      sides[dice.side - 1]++
+    }
+    var sum = 0
+    for (var i = 0; i < sides.length; i++) {
+      if (sides[i] >= 2) {
+        sum += (i + 1) * 2
+      }
+    }
+    return sum
+  }
+  return 0
+}
+
+const twoPairs = {
+  maxPoints: 22,
+  validator: twoPairsValidator,
+  points: twoPairsPoints
+}
+
 export const upperScores = [
   { name: 'Aces', description: 'Any combination', score: 'The sum of dice with the number 1', dices: [], rule: aces },
   { name: 'Twos', description: 'Any combination', score: 'The sum of dice with the number 2', dices: [], rule: twos },
@@ -274,11 +348,14 @@ export const upperScores = [
 ]
 
 export const lowerScores = [
+  { name: 'One Pair', description: 'At least one pair', score: 'Sum of pair', dices: [], rule: onePair },
+  { name: 'Two Pairs', description: 'At least two pair of different dice', score: 'Sum of pairs', dices: [], rule: twoPairs },
   { name: 'Three Of A Kind', description: 'At least three dice the same', score: 'Sum of three', dices: [], rule: threeOfAKind },
   { name: 'Four Of A Kind', description: 'At least four dice the same', score: 'Sum of four', dices: [], rule: fourOfAKind },
-  { name: 'Full House', description: 'Three of one number and two of another', score: 'Sum of all dice', dices: [], rule: fullHouse },
   { name: 'Small Straight', description: 'Five sequential dice (1-2-3-4-5)', score: '15', dices: [], rule: smallStraight },
   { name: 'Large Straight', description: 'Five sequential dice (2-3-4-5-6)', score: '20', dices: [], rule: largeStraight },
-  { name: 'Yahtzee', description: 'All five dice the same', score: '50', dices: [], rule: yahtzee },
-  { name: 'Chance', description: 'Any combination', score: 'Sum of all dice', dices: [], rule: chance }
+  { name: 'Full House', description: 'Three of one number and two of another', score: 'Sum of all dice', dices: [], rule: fullHouse },
+  { name: 'Chance', description: 'Any combination', score: 'Sum of all dice', dices: [], rule: chance },
+  { name: 'Yahtzee', description: 'All five dice the same', score: '50', dices: [], rule: yahtzee }
+
 ]
