@@ -39,6 +39,8 @@
           v-bind:score="score"
           v-bind:class="{ avoidclicks: rollRound==0 }"
           v-bind:showDesc="showDesc"
+          v-bind:playerDices="dices"
+          v-bind:rollRound="rollRound"
         ></score-category>
       </div>
       <div class="column">
@@ -49,6 +51,8 @@
           v-bind:score="score"
           v-bind:class="{ avoidclicks: rollRound==0 }"
           v-bind:showDesc="showDesc"
+          v-bind:playerDices="dices"
+          v-bind:rollRound="rollRound"
         ></score-category>
       </div>
     </div>
