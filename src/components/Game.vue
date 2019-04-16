@@ -1,14 +1,15 @@
 <template>
   <div class="game">
     <div class="row">
-      <div class="column">
+      <div class="column top">
         <div>Game Round: {{gameRound}}</div>
         <div>Roll Round: {{rollRound}}</div>
       </div>
-      <div class="column">
+      <div class="column top">
         <div>
           <input type="checkbox" id="checkbox" v-model="showDesc">
-          <label for="checkbox">Show descriptions</label>
+          <label for="checkbox">Show Descriptions</label>
+          <button class="skip-button" @click="nextRound">Skip Round</button>
         </div>
       </div>
     </div>
@@ -25,8 +26,8 @@
       </div>
     </div>
     <div class="row">
-      <div class="column">
-        <button class="roll-button" @click="roll">Roll</button>
+      <div class="buttons">
+        <button class="game-button" @click="roll">Roll</button>
       </div>
     </div>
 
@@ -106,6 +107,9 @@ export default {
     roll: function () {
       this.$store.dispatch('roll')
     },
+    nextRound: function () {
+      this.$store.dispatch('nextRound')
+    },
     lockDice: function (index) {
       this.$store.dispatch('lockDice', index)
     },
@@ -121,11 +125,51 @@ export default {
 </script>
 
 <style scoped>
-.roll-button {
-  background-color: rgb(160, 199, 155);
+
+.top {
+  text-align: left;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-left: 1em;
+  margin-right: 1em;
+  flex: 1;
+}
+
+.game-button {
+  background-color: rgb(224, 161, 161);
   border: 0px;
-  border-top: 4px solid rgb(73, 73, 73);
+  color: rgb(73, 73, 73);
   font-size: 1.5em;
+  cursor: pointer;
+  text-align: center;
+  width: 300px;
+  height: 50px;
+  box-shadow: 0 6px #999;
+  outline: none;
+}
+
+.game-button:hover {background-color: rgb(219, 124, 124)}
+
+.game-button:active {
+  background-color:  rgb(219, 124, 124);
+  box-shadow: 0 2px #999;
+  transform: translateY(4px);
+}
+
+.skip-button {
+  width: 100px;
+  height: 20px;
+  font-size: 1em;
+  background-color: rgb(224, 161, 161);
+  border: 0px;
+  color: rgb(73, 73, 73);
+  cursor: pointer;
+  text-align: center;
+  outline: none;
+  margin-left: 20px;
 }
 
 .game {

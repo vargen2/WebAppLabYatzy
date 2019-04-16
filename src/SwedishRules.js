@@ -359,3 +359,5 @@ export const lowerScores = [
   { name: 'Yahtzee', description: 'All five dice the same', score: '50', dices: [], rule: yahtzee }
 
 ]
+
+export const maxGameRound = 15

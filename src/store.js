@@ -11,6 +11,7 @@ export default new Vuex.Store({
     lowerScores: [],
     totalScore: Object,
     gameRound: Number,
+    maxGameRound: Number,
     rollRound: Number,
     showDesc: Boolean
   },
@@ -40,11 +41,12 @@ export default new Vuex.Store({
             return sum
           } } }
       state.gameRound = 0
+      state.maxGameRound = rules.maxGameRound
       state.rollRound = 0
       state.showDesc = false
     },
     roll (state) {
-      if (state.rollRound >= 3) {
+      if (state.rollRound >= 3 || state.gameRound >= state.maxGameRound) {
         return
       }
       for (let i = 0; i < state.dices.length; i++) {
@@ -55,6 +57,9 @@ export default new Vuex.Store({
       }
       state.rollRound++
     },
+    nextRound (state) {
+      this.commit('resetRound')
+    },
     lockDice (state, index) {
       if (state.rollRound === 0) {
         return
@@ -62,10 +67,11 @@ export default new Vuex.Store({
       state.dices[index].locked = !state.dices[index].locked
     },
     resetRound (state) {
-      if (state.gameRound >= 12) {
+      state.rollRound = 0
+      if (state.gameRound >= state.maxGameRound) {
         return
       }
-      state.rollRound = 0
+
       state.gameRound++
       for (const dice of state.dices) {
         dice.locked = false
@@ -93,6 +99,9 @@ export default new Vuex.Store({
   actions: {
     roll () {
       this.commit('roll')
+    },
+    nextRound () {
+      this.commit('nextRound')
     },
     lockDice (state, index) {
       this.commit('lockDice', index)
