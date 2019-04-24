@@ -119,6 +119,14 @@ export default {
     selectLowerScore: function (index) {
       this.$store.dispatch('selectLowerScore', index)
     }
+  },
+  created: function () {
+    var self = this
+    document.addEventListener('keydown', function (event) {
+      if (event.keyCode === 82) {
+        self.roll()
+      }
+    })
   }
 }
 
@@ -149,12 +157,15 @@ export default {
   height: 50px;
   box-shadow: 0 6px #999;
   outline: none;
+  border-radius: 4px;
 }
 
-.game-button:hover {background-color: rgb(219, 124, 124)}
+.game-button:hover {
+  background-color: rgb(219, 124, 124);
+}
 
 .game-button:active {
-  background-color:  rgb(219, 124, 124);
+  background-color: rgb(219, 124, 124);
   box-shadow: 0 2px #999;
   transform: translateY(4px);
 }

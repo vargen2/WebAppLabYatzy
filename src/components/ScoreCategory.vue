@@ -61,7 +61,7 @@ export default {
 
 <style scoped>
 .scorecategory {
-  background-color: rgb(160, 199, 155);
+  background-color: rgb(102, 143, 197);
   width: 100%;
   height: 3em;
   cursor: pointer;
@@ -108,7 +108,7 @@ export default {
   font-weight: bold;
   text-decoration-style: dotted;
   text-decoration-line: underline;
-  color: rgb(49, 107, 64);
+  color: rgb(178, 235, 193);
 }
 
 .small-dice {
