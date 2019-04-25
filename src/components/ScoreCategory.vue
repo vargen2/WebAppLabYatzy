@@ -63,7 +63,7 @@ export default {
 .scorecategory {
   background-color: rgb(102, 143, 197);
   width: 100%;
-  height: 3em;
+  height: 3.4em;
   cursor: pointer;
   margin-bottom: 4px;
   display: flex;
@@ -86,6 +86,7 @@ export default {
   display: flex;
   justify-content: space-between;
   margin: 0.1em;
+ 
 }
 
 .dicerow {
@@ -99,6 +100,7 @@ export default {
   /* background-color: rgb(161, 161, 161); */
   color: rgb(73, 73, 73);
   font-size: 1.5em;
+  
   font-weight: bold;
 }
 

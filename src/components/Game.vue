@@ -9,19 +9,21 @@
         <div>
           <input type="checkbox" id="checkbox" v-model="showDesc">
           <label for="checkbox">Show Descriptions</label>
-          <button class="skip-button" @click="nextRound">Skip Round</button>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="column">
         <div class="dicerow">
-          <dice
-            v-for="(dice, index) in dices"
-            v-bind:key="index"
-            v-on:dice-click="lockDice(index)"
-            v-bind:dice="dice"
-          ></dice>
+          <div v-if="rollRound!=0">
+            <dice
+              v-for="(dice, index) in dices"
+              v-bind:key="index"
+              v-on:dice-click="lockDice(index)"
+              v-bind:dice="dice"
+            ></dice>
+          </div>
+          <button class="skip-button" @click="nextRound">Skip Round</button>
         </div>
       </div>
     </div>
@@ -105,22 +107,23 @@ export default {
   },
   methods: {
     roll: function () {
-      this.$store.dispatch('roll')
+      this.$store.commit('roll')
     },
     nextRound: function () {
-      this.$store.dispatch('nextRound')
+      this.$store.commit('nextRound')
     },
     lockDice: function (index) {
-      this.$store.dispatch('lockDice', index)
+      this.$store.commit('lockDice', index)
     },
     selectUpperScore: function (index) {
-      this.$store.dispatch('selectUpperScore', index)
+      this.$store.commit('selectUpperScore', index)
     },
     selectLowerScore: function (index) {
-      this.$store.dispatch('selectLowerScore', index)
+      this.$store.commit('selectLowerScore', index)
     }
   },
   created: function () {
+    this.$store.commit('initGame')
     var self = this
     document.addEventListener('keydown', function (event) {
       if (event.keyCode === 82) {
@@ -129,10 +132,13 @@ export default {
     })
   }
 }
-
 </script>
 
 <style scoped>
+html,
+body {
+  height: auto;
+}
 
 .top {
   text-align: left;
@@ -146,41 +152,39 @@ export default {
   flex: 1;
 }
 
-.game-button {
+button {
   background-color: rgb(224, 161, 161);
-  border: 0px;
   color: rgb(73, 73, 73);
-  font-size: 1.5em;
+  box-shadow: 0 4px rgb(124, 89, 89);
+  border-radius: 4px;
   cursor: pointer;
   text-align: center;
+  border: 2px solid rgb(226, 190, 190);
+}
+
+button:hover {
+  background-color: rgb(219, 124, 124);
+}
+
+button:active {
+  background-color: rgb(219, 124, 124);
+  box-shadow: 0 2px rgb(124, 89, 89);
+  transform: translateY(2px);
+}
+
+.game-button {
+  font-size: 1.5em;
   width: 300px;
   height: 50px;
-  box-shadow: 0 6px #999;
   outline: none;
-  border-radius: 4px;
-}
-
-.game-button:hover {
-  background-color: rgb(219, 124, 124);
-}
-
-.game-button:active {
-  background-color: rgb(219, 124, 124);
-  box-shadow: 0 2px #999;
-  transform: translateY(4px);
 }
 
 .skip-button {
   width: 100px;
-  height: 20px;
+  height: 3em;
   font-size: 1em;
-  background-color: rgb(224, 161, 161);
-  border: 0px;
-  color: rgb(73, 73, 73);
-  cursor: pointer;
-  text-align: center;
-  outline: none;
   margin-left: 20px;
+  outline: none;
 }
 
 .game {
@@ -194,6 +198,8 @@ export default {
   display: flex;
   justify-content: space-evenly;
   margin-bottom: 1em;
+  background-color: #8bc990;
+  padding: 26px;
 }
 
 .avoidclicks {

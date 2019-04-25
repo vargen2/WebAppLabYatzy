@@ -95,22 +95,22 @@ export default new Vuex.Store({
     showDesc (state) {
       state.showDesc = !state.showDesc
     }
-  },
-  actions: {
-    roll () {
-      this.commit('roll')
-    },
-    nextRound () {
-      this.commit('nextRound')
-    },
-    lockDice (state, index) {
-      this.commit('lockDice', index)
-    },
-    selectUpperScore (state, index) {
-      this.commit('selectUpperScore', index)
-    },
-    selectLowerScore (state, index) {
-      this.commit('selectLowerScore', index)
-    }
   }
+  // actions: {
+  //   roll () {
+  //     this.commit('roll')
+  //   },
+  //   nextRound () {
+  //     this.commit('nextRound')
+  //   },
+  //   lockDice (state, index) {
+  //     this.commit('lockDice', index)
+  //   },
+  //   selectUpperScore (state, index) {
+  //     this.commit('selectUpperScore', index)
+  //   },
+  //   selectLowerScore (state, index) {
+  //     this.commit('selectLowerScore', index)
+  //   }
+  // }
 })
