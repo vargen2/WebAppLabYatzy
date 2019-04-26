@@ -5,28 +5,35 @@
       <div class="row">
         <div class="column">
           <a
-            href="https://web.archive.org/web/20160304135412/http://www.algaspel.se/~/media/Alga/Files/Rules/flersprakiga/38018737_ReseYatzy.ashx"
+            href="https://en.wikipedia.org/wiki/Yatzy"
             target="_blank"
             rel="noopener noreferrer"
-          >Swedish Rules</a>
-          <a
-            href="https://sv.wikipedia.org/wiki/Yatzy"
-            target="_blank"
-            rel="noopener noreferrer"
-          >https://sv.wikipedia.org/wiki/Yatzy</a>
-          <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">https://vuejs.org</a>
-        </div>
-        <div class="column">
+          >https://en.wikipedia.org/wiki/Yatzy</a>
           <a
             href="https://github.com/vargen2"
             target="_blank"
             rel="noopener noreferrer"
           >https://github.com/vargen2</a>
+           <a
+            href="https://www.iths.se"
+            target="_blank"
+            rel="noopener noreferrer"
+          >https://www.iths.se</a>
+
+        </div>
+        <div class="column">
+          <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">https://vuejs.org</a>
           <a
-            href="https://vuex.vuejs.org/"
+            href="https://vuex.vuejs.org"
             target="_blank"
             rel="noopener noreferrer"
           >https://vuex.vuejs.org</a>
+           <a
+            href="https://cli.vuejs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >https://cli.vuejs.org</a>
+
         </div>
       </div>
     </footer>

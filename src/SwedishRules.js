@@ -358,15 +358,15 @@ export const upperScores = [
 ]
 
 export const lowerScores = [
-  { name: 'One Pair', description: '(Key A) At least one pair', score: 'Sum of pair', dices: [], rule: onePair, keyCode: 65 },
-  { name: 'Two Pairs', description: '(Key S) At least two pair of different dice', score: 'Sum of pairs', dices: [], rule: twoPairs, keyCode: 83 },
-  { name: 'Three Of A Kind', description: '(Key D) At least three dice the same', score: 'Sum of three', dices: [], rule: threeOfAKind, keyCode: 68 },
-  { name: 'Four Of A Kind', description: '(Key F) At least four dice the same', score: 'Sum of four', dices: [], rule: fourOfAKind, keyCode: 70 },
-  { name: 'Small Straight', description: '(Key G) Five sequential dice (1-2-3-4-5)', score: '15', dices: [], rule: smallStraight, keyCode: 71 },
-  { name: 'Large Straight', description: '(Key H) Five sequential dice (2-3-4-5-6)', score: '20', dices: [], rule: largeStraight, keyCode: 72 },
-  { name: 'Full House', description: '(Key J) Three of one and two of another', score: 'Sum of all dice', dices: [], rule: fullHouse, keyCode: 74 },
+  { name: 'One Pair', description: '(Key A) One pair', score: 'Sum of pair', dices: [], rule: onePair, keyCode: 65 },
+  { name: 'Two Pairs', description: '(Key S) Two pair of different dice', score: 'Sum of pairs', dices: [], rule: twoPairs, keyCode: 83 },
+  { name: 'Three Of A Kind', description: '(Key D) Three of same', score: 'Sum of three', dices: [], rule: threeOfAKind, keyCode: 68 },
+  { name: 'Four Of A Kind', description: '(Key F) Four of same', score: 'Sum of four', dices: [], rule: fourOfAKind, keyCode: 70 },
+  { name: 'Small Straight', description: '(Key G) 1-2-3-4-5', score: '15', dices: [], rule: smallStraight, keyCode: 71 },
+  { name: 'Large Straight', description: '(Key H) 2-3-4-5-6', score: '20', dices: [], rule: largeStraight, keyCode: 72 },
+  { name: 'Full House', description: '(Key J) Three of same, two of another', score: 'Sum of all dice', dices: [], rule: fullHouse, keyCode: 74 },
   { name: 'Chance', description: '(Key K) Any combination', score: 'Sum of all dice', dices: [], rule: chance, keyCode: 75 },
-  { name: 'Yahtzee', description: '(Key L) All five dice the same', score: '50', dices: [], rule: yahtzee, keyCode: 76 }
+  { name: 'Yahtzee', description: '(Key L) All five same', score: '50', dices: [], rule: yahtzee, keyCode: 76 }
 
 ]
 

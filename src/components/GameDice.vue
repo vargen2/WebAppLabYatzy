@@ -5,7 +5,7 @@
     v-on:click="$emit('dice-click')"
     :style="{left:startposx+ 'px',bottom:startposy+ 'px'}"
   >
-    <img :src="image" >
+    <img :src="image">
     <span v-if="dice.locked">locked</span>
   </div>
 </template>
@@ -66,13 +66,12 @@ img {
 }
 .gamedice {
   line-height: 1em;
-  height: 100px;
-  width: 100px;
+  height: 50px;
+  width: 50px;
   cursor: pointer;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.76);
-  border-radius: 15px;
+  border-radius: 6px;
   text-align: center;
-  /* transition: all 0.1s ease; */
 }
 
 .locked {
@@ -84,8 +83,15 @@ img {
   pointer-events: none;
 }
 
-.hidden{
+.hidden {
   opacity: 0;
 }
 
+@media screen and (min-width: 550px) {
+  .gamedice {
+    height: 90px;
+    width: 90px;
+    border-radius: 15px;
+  }
+}
 </style>

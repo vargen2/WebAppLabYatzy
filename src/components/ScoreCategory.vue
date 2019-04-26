@@ -8,7 +8,7 @@
       <div class="title">{{score.name}}</div>
       <div class="content">
         <div class="dicerow">
-          <span v-if="showDesc && score.dices.length==0">{{score.description}}</span>
+          <span class="desctext" v-if="showDesc && score.dices.length==0">{{score.description}}</span>
           <dice
             class="small-dice"
             v-for="(dice, index) in score.dices"
@@ -111,7 +111,6 @@ export default {
 
 .points {
   width: 2em;
-  /* background-color: rgb(161, 161, 161); */
   color: rgb(73, 73, 73);
   font-size: 1.5em;
 
@@ -138,6 +137,10 @@ export default {
 
 .transparent{
   background-color: transparent;
+}
+
+.desctext {
+  font-size: 12px;
 }
 
 </style>
