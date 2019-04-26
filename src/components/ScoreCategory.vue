@@ -1,7 +1,7 @@
 <template>
   <div
     class="scorecategory"
-    v-bind:class="{avoidclicks : score.dices.length >0|| !valid}"
+    v-bind:class="{avoidclicks : score.dices.length >0|| !valid,transparent:transparent}"
     v-on:click="$emit('score-click')"
   >
     <div class="left">
@@ -17,7 +17,8 @@
           ></dice>
         </div>
         <div class="points" v-if=" (score.dices && score.dices.length>0) ||points>0">{{points}}</div>
-        <div class="suggestedPoints" v-else-if="valid">{{suggestedPoints}}</div>
+        <div class="suggestedPoints" v-else-if="valid">{{suggestedPoints}} / {{score.rule.maxPoints}}</div>
+
       </div>
     </div>
   </div>
@@ -29,9 +30,10 @@ export default {
   name: 'ScoreCategory',
   props: {
     score: Object,
-    playerDices: [],
+    playerDices: Array,
     rollRound: Number,
-    showDesc: Boolean
+    showDesc: Boolean,
+    transparent: Boolean
   },
   computed: {
     points: function () {
@@ -52,6 +54,18 @@ export default {
         this.score.rule.validator(this.playerDices)
       )
     }
+  },
+  created: function () {
+    var self = this
+    document.addEventListener('keyup', function (event) {
+      if (self.score.keyCode) {
+        console.log(self.score.keyCode)
+        console.log(event.keyCode)
+        if (event.keyCode === self.score.keyCode) {
+          self.$emit('score-click')
+        }
+      }
+    })
   },
   components: {
     Dice
@@ -86,7 +100,7 @@ export default {
   display: flex;
   justify-content: space-between;
   margin: 0.1em;
- 
+
 }
 
 .dicerow {
@@ -100,12 +114,11 @@ export default {
   /* background-color: rgb(161, 161, 161); */
   color: rgb(73, 73, 73);
   font-size: 1.5em;
-  
+
   font-weight: bold;
 }
 
 .suggestedPoints {
-  width: 2em;
   font-size: 1.5em;
   font-weight: bold;
   text-decoration-style: dotted;
@@ -121,6 +134,10 @@ export default {
 
 .avoidclicks {
   pointer-events: none;
+}
+
+.transparent{
+  background-color: transparent;
 }
 
 </style>

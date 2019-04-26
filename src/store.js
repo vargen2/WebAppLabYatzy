@@ -9,18 +9,19 @@ export default new Vuex.Store({
     dices: [],
     upperScores: [],
     lowerScores: [],
-    totalScore: Object,
-    gameRound: Number,
-    maxGameRound: Number,
-    rollRound: Number,
-    showDesc: Boolean
+    totalScore: null,
+    gameRound: null,
+    maxGameRound: null,
+    rollRound: null,
+    showDesc: false,
+    rolling: false
   },
   setters: {
 
   },
   mutations: {
     initGame (state) {
-      state.dices = [{ side: 1, isInteractive: false, locked: false }, { side: 1, isInteractive: false, locked: false }, { side: 1, isInteractive: false, locked: false }, { side: 1, isInteractive: false, locked: false }, { side: 1, isInteractive: false, locked: false }]
+      state.dices = [{ side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }]
       state.upperScores = rules.upperScores
       state.lowerScores = rules.lowerScores
       state.totalScore = { name: 'Total',
@@ -56,6 +57,9 @@ export default new Vuex.Store({
         }
       }
       state.rollRound++
+      state.rolling = true
+      setTimeout(() => { state.rolling = false }
+        , 600)
     },
     nextRound (state) {
       this.commit('resetRound')
@@ -96,21 +100,4 @@ export default new Vuex.Store({
       state.showDesc = !state.showDesc
     }
   }
-  // actions: {
-  //   roll () {
-  //     this.commit('roll')
-  //   },
-  //   nextRound () {
-  //     this.commit('nextRound')
-  //   },
-  //   lockDice (state, index) {
-  //     this.commit('lockDice', index)
-  //   },
-  //   selectUpperScore (state, index) {
-  //     this.commit('selectUpperScore', index)
-  //   },
-  //   selectLowerScore (state, index) {
-  //     this.commit('selectLowerScore', index)
-  //   }
-  // }
 })

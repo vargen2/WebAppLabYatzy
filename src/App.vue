@@ -33,12 +33,42 @@
   </div>
 </template>
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 550px) {
+  .column {
+    flex: 1;
+  }
+
+  .column:nth-child(2) {
+    margin-left: 2em;
+  }
+}
+
+body {
+  font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.4;
+  max-width: 800px;
+  margin: 0px auto;
+  padding: 0 10px;
+  color: #2c3e50;
+  background: rgb(233, 233, 233);
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
 #nav {

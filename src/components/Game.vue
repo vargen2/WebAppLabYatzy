@@ -1,3 +1,5 @@
+// TODO flytta game till views och se om jag kan göra components helt DRY
+
 <template>
   <div class="game">
     <div class="row">
@@ -7,32 +9,36 @@
       </div>
       <div class="column top">
         <div>
-          <input type="checkbox" id="checkbox" v-model="showDesc">
-          <label for="checkbox">Show Descriptions</label>
+          Descriptions <toggle-button color="#8bc990" font-size="14" v-model="showDesc" :labels="true"/>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="column">
-        <div class="dicerow">
-          <div v-if="rollRound!=0">
-            <dice
-              v-for="(dice, index) in dices"
-              v-bind:key="index"
-              v-on:dice-click="lockDice(index)"
-              v-bind:dice="dice"
-            ></dice>
-          </div>
-          <button class="skip-button" @click="nextRound">Skip Round</button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="buttons">
-        <button class="game-button" @click="roll">Roll</button>
       </div>
     </div>
 
+    <div class="row green">
+      <div class="column">
+        <score-category class="avoidclicks" v-bind:score="totalScore" :transparent="true"></score-category>
+        <h1 class="floating" v-show="gameRound==15">GAME FINISHED, CONGRATULATIONS!</h1>
+        <div class="dicerow">
+          <game-dice
+            v-for="(dice, index) in dices"
+            v-bind:key="index"
+            v-on:dice-click="lockDice(index)"
+            v-bind:dice="dice"
+            v-bind:offsetx="index"
+          ></game-dice>
+        </div>
+        <div class="buttons">
+          <button class="game-button" @click="roll">
+            Roll
+            <span v-show="showDesc">(Key R)</span>
+          </button>
+          <button class="skip-button" @click="nextRound">
+            Skip Round
+            <span v-show="showDesc">(Key T)</span>
+          </button>
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="column">
         <score-category
@@ -61,20 +67,19 @@
     </div>
 
     <div class="row">
-      <div class="column">
-        <score-category class="avoidclicks" v-bind:score="totalScore"></score-category>
-      </div>
+      <div class="column"></div>
     </div>
   </div>
 </template>
 
 <script>
-import Dice from './Dice.vue'
+import GameDice from './GameDice.vue'
 import ScoreCategory from './ScoreCategory.vue'
+
 export default {
   name: 'Game',
   components: {
-    Dice,
+    GameDice,
     ScoreCategory
   },
   computed: {
@@ -124,10 +129,12 @@ export default {
   },
   created: function () {
     this.$store.commit('initGame')
-    var self = this
-    document.addEventListener('keydown', function (event) {
+    let self = this
+    document.addEventListener('keyup', function (event) {
       if (event.keyCode === 82) {
         self.roll()
+      } else if (event.keyCode === 84) {
+        self.nextRound()
       }
     })
   }
@@ -145,11 +152,10 @@ body {
 }
 
 .buttons {
+  padding: 20px;
   display: flex;
-  justify-content: center;
-  margin-left: 1em;
-  margin-right: 1em;
-  flex: 1;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 button {
@@ -174,16 +180,17 @@ button:active {
 
 .game-button {
   font-size: 1.5em;
-  width: 300px;
+  width: 350px;
   height: 50px;
   outline: none;
+  margin-bottom: 15px;
 }
 
 .skip-button {
-  width: 100px;
-  height: 3em;
+  /* float: right; */
+  width: 180px;
+  height: 50px;
   font-size: 1em;
-  margin-left: 20px;
   outline: none;
 }
 
@@ -196,13 +203,19 @@ button:active {
 
 .dicerow {
   display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 1em;
-  background-color: #8bc990;
+  justify-content: space-between;
   padding: 26px;
+}
+
+.green {
+  background-color: #8bc990;
 }
 
 .avoidclicks {
   pointer-events: none;
+}
+
+.floating {
+  position: absolute;
 }
 </style>

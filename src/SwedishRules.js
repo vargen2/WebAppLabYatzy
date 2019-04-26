@@ -11,6 +11,7 @@ const acesPoints = function (arr) {
 }
 
 const aces = {
+  maxPoints: 1 * 5,
   validator: anyValidator,
   points: acesPoints
 }
@@ -20,6 +21,7 @@ const twosPoints = function (arr) {
 }
 
 const twos = {
+  maxPoints: 2 * 5,
   validator: anyValidator,
   points: twosPoints
 }
@@ -29,6 +31,7 @@ const threesPoints = function (arr) {
 }
 
 const threes = {
+  maxPoints: 3 * 5,
   validator: anyValidator,
   points: threesPoints
 }
@@ -38,6 +41,7 @@ const foursPoints = function (arr) {
 }
 
 const fours = {
+  maxPoints: 4 * 5,
   validator: anyValidator,
   points: foursPoints
 }
@@ -47,6 +51,7 @@ const fivesPoints = function (arr) {
 }
 
 const fives = {
+  maxPoints: 5 * 5,
   validator: anyValidator,
   points: fivesPoints
 }
@@ -56,6 +61,7 @@ const sixesPoints = function (arr) {
 }
 
 const sixes = {
+  maxPoints: 6 * 5,
   validator: anyValidator,
   points: sixesPoints
 }
@@ -80,6 +86,7 @@ const smallStraightPoints = function (arr) {
 }
 
 const smallStraight = {
+  maxPoints: 15,
   validator: smallStraightValidator,
   points: smallStraightPoints
 }
@@ -104,6 +111,7 @@ const largeStraightPoints = function (arr) {
 }
 
 const largeStraight = {
+  maxPoints: 20,
   validator: largeStraightValidator,
   points: largeStraightPoints
 }
@@ -127,6 +135,7 @@ const yahtzeePoints = function (arr) {
 }
 
 export const yahtzee = {
+  maxPoints: 50,
   validator: yahtzeeValidator,
   points: yahtzeePoints
 }
@@ -136,6 +145,7 @@ const chancePoints = function (arr) {
 }
 
 const chance = {
+  maxPoints: 30,
   validator: anyValidator,
   points: chancePoints
 }
@@ -318,12 +328,12 @@ const twoPairs = {
 }
 
 export const upperScores = [
-  { name: 'Aces', description: 'Any combination', score: 'The sum of dice with the number 1', dices: [], rule: aces },
-  { name: 'Twos', description: 'Any combination', score: 'The sum of dice with the number 2', dices: [], rule: twos },
-  { name: 'Threes', description: 'Any combination', score: 'The sum of dice with the number 3', dices: [], rule: threes },
-  { name: 'Fours', description: 'Any combination', score: 'The sum of dice with the number 4', dices: [], rule: fours },
-  { name: 'Fives', description: 'Any combination', score: 'The sum of dice with the number 5', dices: [], rule: fives },
-  { name: 'Sixes', description: 'Any combination', score: 'The sum of dice with the number 6', dices: [], rule: sixes },
+  { name: 'Aces', description: '(Key 1) Any combination', score: 'The sum of dice with the number 1', dices: [], rule: aces, keyCode: 49 },
+  { name: 'Twos', description: '(Key 2) Any combination', score: 'The sum of dice with the number 2', dices: [], rule: twos, keyCode: 50 },
+  { name: 'Threes', description: '(Key 3) Any combination', score: 'The sum of dice with the number 3', dices: [], rule: threes, keyCode: 51 },
+  { name: 'Fours', description: '(Key 4) Any combination', score: 'The sum of dice with the number 4', dices: [], rule: fours, keyCode: 52 },
+  { name: 'Fives', description: '(Key 5) Any combination', score: 'The sum of dice with the number 5', dices: [], rule: fives, keyCode: 53 },
+  { name: 'Sixes', description: '(Key 6) Any combination', score: 'The sum of dice with the number 6', dices: [], rule: sixes, keyCode: 54 },
   { name: 'Bonus',
     description: 'If more than 63',
     score: '50',
@@ -348,15 +358,15 @@ export const upperScores = [
 ]
 
 export const lowerScores = [
-  { name: 'One Pair', description: 'At least one pair', score: 'Sum of pair', dices: [], rule: onePair },
-  { name: 'Two Pairs', description: 'At least two pair of different dice', score: 'Sum of pairs', dices: [], rule: twoPairs },
-  { name: 'Three Of A Kind', description: 'At least three dice the same', score: 'Sum of three', dices: [], rule: threeOfAKind },
-  { name: 'Four Of A Kind', description: 'At least four dice the same', score: 'Sum of four', dices: [], rule: fourOfAKind },
-  { name: 'Small Straight', description: 'Five sequential dice (1-2-3-4-5)', score: '15', dices: [], rule: smallStraight },
-  { name: 'Large Straight', description: 'Five sequential dice (2-3-4-5-6)', score: '20', dices: [], rule: largeStraight },
-  { name: 'Full House', description: 'Three of one number and two of another', score: 'Sum of all dice', dices: [], rule: fullHouse },
-  { name: 'Chance', description: 'Any combination', score: 'Sum of all dice', dices: [], rule: chance },
-  { name: 'Yahtzee', description: 'All five dice the same', score: '50', dices: [], rule: yahtzee }
+  { name: 'One Pair', description: '(Key A) At least one pair', score: 'Sum of pair', dices: [], rule: onePair, keyCode: 65 },
+  { name: 'Two Pairs', description: '(Key S) At least two pair of different dice', score: 'Sum of pairs', dices: [], rule: twoPairs, keyCode: 83 },
+  { name: 'Three Of A Kind', description: '(Key D) At least three dice the same', score: 'Sum of three', dices: [], rule: threeOfAKind, keyCode: 68 },
+  { name: 'Four Of A Kind', description: '(Key F) At least four dice the same', score: 'Sum of four', dices: [], rule: fourOfAKind, keyCode: 70 },
+  { name: 'Small Straight', description: '(Key G) Five sequential dice (1-2-3-4-5)', score: '15', dices: [], rule: smallStraight, keyCode: 71 },
+  { name: 'Large Straight', description: '(Key H) Five sequential dice (2-3-4-5-6)', score: '20', dices: [], rule: largeStraight, keyCode: 72 },
+  { name: 'Full House', description: '(Key J) Three of one and two of another', score: 'Sum of all dice', dices: [], rule: fullHouse, keyCode: 74 },
+  { name: 'Chance', description: '(Key K) Any combination', score: 'Sum of all dice', dices: [], rule: chance, keyCode: 75 },
+  { name: 'Yahtzee', description: '(Key L) All five dice the same', score: '50', dices: [], rule: yahtzee, keyCode: 76 }
 
 ]
 

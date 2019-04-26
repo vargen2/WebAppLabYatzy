@@ -1,49 +1,59 @@
 <template>
   <div
-    class="dice"
-    v-bind:class="{ avoidclicks: !dice.isInteractive,locked: dice.locked }"
-    v-on:click="diceClick"
+    class="gamedice"
+    v-bind:class="{ avoidclicks: !dice.isInteractive,locked: dice.locked,hidden:rollRound==0}"
+    v-on:click="$emit('dice-click')"
+    :style="{left:startposx+ 'px',bottom:startposy+ 'px'}"
   >
-    <img :src="image">
+    <img :src="image" >
     <span v-if="dice.locked">locked</span>
   </div>
 </template>
 
 <script>
-import { setTimeout, setInterval, clearInterval } from 'timers'
+import { setTimeout } from 'timers'
 export default {
   name: 'GameDice',
   props: {
     dice: Object,
-    offSetX: Number,
-    offSetY: Number
+    offsetx: Number,
+    offsety: Number
   },
   data: function () {
-    return { side: 2, posX: 0, posY: 0, rolling: false }
+    return { side: 2, posX: 0, posY: 0, rollIntervall: null }
   },
   computed: {
     image: function () {
       return require('@/assets/Dice-' + this.compSide + '.svg')
     },
     compSide: function () {
-      return this.rolling ? this.side : this.dice.side
+      return this.rolling && !this.dice.locked ? this.side : this.dice.side
+    },
+    rolling: function () {
+      this.startRoll()
+      return this.$store.state.rolling
+    },
+    rollRound: function () {
+      return this.$store.state.rollRound
+    },
+    startposx: function () {
+      return parseInt(this.offsetx) * 70 + 150
+    },
+    startposy: function () {
+      return 10 + this.posY
     }
   },
   methods: {
-    diceClick: function () {
-      this.$emit('dice-click')
-      this.startRoll()
-    },
     startRoll: function () {
-      this.rolling = true
-      var rollIntervall = setInterval(
-        (this.side = Math.floor(Math.random() * 5) + 1),
-        500
-      )
-      setTimeout(() => {
-        this.rolling = false
-        clearInterval(rollIntervall)
-      }, 3000)
+      if (this.$store.state.rolling) {
+        this.rollIntervall = setInterval(() => {
+          this.side = Math.floor(Math.random() * 5) + 1
+        }, 100)
+        setTimeout(this.asdf, 500)
+      }
+    },
+    asdf: function () {
+      window.clearInterval(this.rollIntervall)
     }
   }
 }
@@ -54,13 +64,15 @@ img {
   width: 100%;
   height: 100%;
 }
-.dice {
+.gamedice {
   line-height: 1em;
-  height: 3em;
-  width: 3em;
+  height: 100px;
+  width: 100px;
   cursor: pointer;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.76);
-  border-radius: 6px;
+  border-radius: 15px;
+  text-align: center;
+  /* transition: all 0.1s ease; */
 }
 
 .locked {
@@ -71,4 +83,9 @@ img {
 .avoidclicks {
   pointer-events: none;
 }
+
+.hidden{
+  opacity: 0;
+}
+
 </style>
