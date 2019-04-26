@@ -1,29 +1,8 @@
-# lab2v2
+## Yatzy game 
 
-## Project setup
-```
-npm install
-```
+Made for Laboration 2 in course Web app at ITHS. Objective was to make a Yatzy ( https://en.wikipedia.org/wiki/Yatzy ) game with vue.js, vuex and vue-cli.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Live Demo
 
-### Compiles and minifies for production
-```
-npm run build
-```
+https://vargen2.github.io/WebAppLabYatzy/
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
