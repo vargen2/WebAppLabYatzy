@@ -14,12 +14,11 @@
             target="_blank"
             rel="noopener noreferrer"
           >https://github.com/vargen2</a>
-           <a
+          <a
             href="https://www.iths.se"
             target="_blank"
             rel="noopener noreferrer"
           >https://www.iths.se</a>
-
         </div>
         <div class="column">
           <a href="https://vuejs.org" target="_blank" rel="noopener noreferrer">https://vuejs.org</a>
@@ -28,12 +27,11 @@
             target="_blank"
             rel="noopener noreferrer"
           >https://vuex.vuejs.org</a>
-           <a
+          <a
             href="https://cli.vuejs.org"
             target="_blank"
             rel="noopener noreferrer"
           >https://cli.vuejs.org</a>
-
         </div>
       </div>
     </footer>
@@ -45,23 +43,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  margin-bottom: 1em;
+  margin-bottom: 8px;
 }
 
 .column {
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-}
-
-@media screen and (min-width: 550px) {
-  .column {
-    flex: 1;
-  }
-
-  .column:nth-child(2) {
-    margin-left: 2em;
-  }
 }
 
 body {
@@ -72,7 +60,7 @@ body {
   margin: 0px auto;
   padding: 0 10px;
   color: #2c3e50;
-  background: rgb(233, 233, 233);
+  background: #ccc;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,5 +80,45 @@ body {
 
 #nav a.router-link-exact-active {
   text-decoration: underline;
+}
+
+button {
+  height: 30px;
+  background-color: #eee;
+  color: rgb(73, 73, 73);
+  box-shadow: 0 4px rgb(126, 118, 118);
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  border: 2px solid #ccc;
+  outline: none;
+}
+
+button:hover {
+  background-color: #dada73;
+}
+
+button:active {
+  background-color: #dada73;
+  box-shadow: 0 2px rgb(126, 118, 118);
+  transform: translateY(2px);
+}
+
+@media screen and (min-width: 550px) {
+  .row {
+  margin-bottom: 16px;
+}
+  
+  .column {
+    flex: 1;
+  }
+
+  .column:nth-child(2) {
+    margin-left: 2em;
+  }
+  button {
+    font-size: 1.5em;
+    height: 50px;
+  }
 }
 </style>

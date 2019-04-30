@@ -1,23 +1,12 @@
-// TODO flytta game till views och se om jag kan göra components helt DRY
-
 <template>
   <div class="game">
-    <div class="row">
-      <div class="column top">
-        <div>Game Round: {{gameRound}}</div>
-        <div>Roll Round: {{rollRound}}</div>
-      </div>
-      <div class="column top">
-        <div>
-          Descriptions <toggle-button color="#8bc990" font-size="14" v-model="showDesc" :labels="true"/>
-        </div>
-      </div>
-    </div>
+    <game-round-bar v-bind:currentRound="gameRound" v-bind:maxRounds="15"></game-round-bar>
 
     <div class="row green">
       <div class="column">
-        <score-category class="avoidclicks" v-bind:score="totalScore" :transparent="true"></score-category>
-        <h1 class="floating" v-show="gameRound==15">GAME FINISHED, CONGRATULATIONS!</h1>
+        <!-- <score-category class="avoidclicks" v-bind:score="totalScore" :transparent="true"></score-category> -->
+        <div class="totalPoints">Total Points: {{totalPoints}}</div>
+        <h4 class="floating" v-show="gameRound==15">GAME FINISHED, CONGRATULATIONS!</h4>
         <div class="dicerow">
           <game-dice
             v-for="(dice, index) in dices"
@@ -28,19 +17,17 @@
           ></game-dice>
         </div>
         <div class="buttons">
-          <button class="game-button" @click="roll">
-            Roll
-            <span v-show="showDesc">(Key R)</span>
-          </button>
+          <roll-button :showDesc="showDesc" :rollRound="rollRound" v-on:roll="roll"/>
+          <!-- <div class="space"></div>
           <button class="skip-button" @click="nextRound">
-            Skip Round
+            Skip
             <span v-show="showDesc">(Key T)</span>
-          </button>
+          </button>-->
         </div>
       </div>
     </div>
     <div class="row">
-      <div class="column">
+      <div class="columnNoWrap">
         <score-category
           v-for="(score, index) in upperScores"
           v-bind:key="index"
@@ -52,7 +39,8 @@
           v-bind:rollRound="rollRound"
         ></score-category>
       </div>
-      <div class="column">
+      <div class="space"></div>
+      <div class="columnNoWrap">
         <score-category
           v-for="(score, index) in lowerScores"
           v-bind:key="index"
@@ -65,9 +53,13 @@
         ></score-category>
       </div>
     </div>
-
     <div class="row">
-      <div class="column"></div>
+      <div class="column">
+        <div>
+          Descriptions
+          <toggle-button color="#8bc990" v-bind:font-size="14" v-model="showDesc" :labels="true"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -75,12 +67,16 @@
 <script>
 import GameDice from './GameDice.vue'
 import ScoreCategory from './ScoreCategory.vue'
+import RollButton from './RollButton.vue'
+import GameRoundBar from './GameRoundBar.vue'
 
 export default {
   name: 'Game',
   components: {
     GameDice,
-    ScoreCategory
+    ScoreCategory,
+    RollButton,
+    GameRoundBar
   },
   computed: {
     dices: function () {
@@ -98,8 +94,11 @@ export default {
     lowerScores: function () {
       return this.$store.state.lowerScores
     },
-    totalScore: function () {
-      return this.$store.state.totalScore
+    // totalScore: function () {
+    //   return this.$store.state.totalScore
+    // },
+    totalPoints: function () {
+      return this.$store.state.totalScore.rule.points()
     },
     showDesc: {
       set () {
@@ -147,51 +146,14 @@ body {
   height: auto;
 }
 
-.top {
-  text-align: left;
-}
-
 .buttons {
-  padding: 20px;
+  padding: 0 20px 10px 20px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
 }
 
-button {
-  background-color: rgb(224, 161, 161);
-  color: rgb(73, 73, 73);
-  box-shadow: 0 4px rgb(124, 89, 89);
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
-  border: 2px solid rgb(226, 190, 190);
-}
-
-button:hover {
-  background-color: rgb(219, 124, 124);
-}
-
-button:active {
-  background-color: rgb(219, 124, 124);
-  box-shadow: 0 2px rgb(124, 89, 89);
-  transform: translateY(2px);
-}
-
-.game-button {
-  font-size: 1.5em;
-  width: 350px;
-  height: 50px;
-  outline: none;
-  margin-bottom: 15px;
-}
-
-.skip-button {
-  /* float: right; */
-  width: 180px;
-  height: 50px;
-  font-size: 1em;
-  outline: none;
+.space {
+  flex: 0.1;
 }
 
 .game {
@@ -204,7 +166,7 @@ button:active {
 .dicerow {
   display: flex;
   justify-content: space-between;
-  padding: 26px;
+  padding: 0px 20px 20px 20px;
 }
 
 .green {
@@ -217,5 +179,23 @@ button:active {
 
 .floating {
   position: absolute;
+margin-left: 20px;
+}
+
+.columnNoWrap {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.totalPoints {
+  margin-left: 20px;
+}
+
+@media screen and (min-width: 550px) {
+  .buttons {
+    padding: 0 20px 20px 20px;
+  }
 }
 </style>

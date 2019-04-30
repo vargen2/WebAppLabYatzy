@@ -1,6 +1,4 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/WebAppLabYatzy/'
-    : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/WebAppLabYatzy/' : '/',
   outputDir: 'docs'
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     class="scorecategory"
-    v-bind:class="{avoidclicks : score.dices.length >0|| !valid,transparent:transparent}"
+    v-bind:class="{avoidclicks : score.dices.length >0,avoidclicks:score.rule.nonInteractive,transparent:transparent,green : !hasDices && valid &&suggestedPoints>0,blue: hasDices,red:!hasDices && rollRound>0&&suggestedPoints==0}"
     v-on:click="$emit('score-click')"
   >
     <div class="left">
@@ -17,8 +17,10 @@
           ></dice>
         </div>
         <div class="points" v-if=" (score.dices && score.dices.length>0) ||points>0">{{points}}</div>
-        <div class="suggestedPoints" v-else-if="valid">{{suggestedPoints}} / {{score.rule.maxPoints}}</div>
-
+        <div
+          class="points"
+          v-else-if="valid"
+        >{{suggestedPoints}} / {{score.rule.maxPoints}}</div>
       </div>
     </div>
   </div>
@@ -49,10 +51,11 @@ export default {
       return this.score.rule.points(this.playerDices)
     },
     valid: function () {
-      return (
-        this.rollRound > 0 &&
-        this.score.rule.validator(this.playerDices)
-      )
+      return this.rollRound > 0
+      // && this.score.rule.validator(this.playerDices)
+    },
+    hasDices: function () {
+      return (this.score.dices && this.score.dices.length > 0)
     }
   },
   created: function () {
@@ -75,12 +78,13 @@ export default {
 
 <style scoped>
 .scorecategory {
-  background-color: rgb(102, 143, 197);
+  background-color: #eee;
   width: 100%;
-  height: 3.4em;
+  height: 48px;
   cursor: pointer;
   margin-bottom: 4px;
   display: flex;
+  transition: background-color 0.15s linear;
 }
 
 .left {
@@ -100,7 +104,6 @@ export default {
   display: flex;
   justify-content: space-between;
   margin: 0.1em;
-
 }
 
 .dicerow {
@@ -110,24 +113,14 @@ export default {
 }
 
 .points {
-  width: 2em;
+  margin-right: 8px;
   color: rgb(73, 73, 73);
-  font-size: 1.5em;
-
   font-weight: bold;
-}
-
-.suggestedPoints {
-  font-size: 1.5em;
-  font-weight: bold;
-  text-decoration-style: dotted;
-  text-decoration-line: underline;
-  color: rgb(178, 235, 193);
 }
 
 .small-dice {
-  height: 1.6em;
-  width: 1.6em;
+  height: 20px;
+  width: 20px;
   margin-right: 0.2em;
 }
 
@@ -135,12 +128,25 @@ export default {
   pointer-events: none;
 }
 
-.transparent{
+.transparent {
   background-color: transparent;
 }
 
 .desctext {
   font-size: 12px;
+}
+
+.green {
+  background-color:#8bc990;
+}
+
+.blue {
+  /* background-color: rgb(102, 143, 197); */
+  background-color: #eee;
+}
+
+.red {
+  background-color: rgb(211, 101, 101);
 }
 
 </style>

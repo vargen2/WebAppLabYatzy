@@ -6,7 +6,7 @@
     :style="{left:startposx+ 'px',bottom:startposy+ 'px'}"
   >
     <img :src="image">
-    <span v-if="dice.locked">locked</span>
+    <span v-if="dice.locked">Locked</span>
   </div>
 </template>
 
@@ -72,11 +72,19 @@ img {
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.76);
   border-radius: 6px;
   text-align: center;
+  transition: all 0.15s ease-out;
+}
+
+.gamedice:hover {
+  transform: scale(0.95);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.76);
+  /* transform: translateY(2px); */
 }
 
 .locked {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.76);
-  transform: translateY(2px);
+  transform: scale(0.95);
+  /* transform: translateY(2px); */
 }
 
 .avoidclicks {

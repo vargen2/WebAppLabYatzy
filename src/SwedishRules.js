@@ -339,6 +339,8 @@ export const upperScores = [
     score: '50',
     dices: [],
     rule: {
+      maxPoints: 50,
+      nonInteractive: true,
       validator: () => false,
       points: () => {
         let sum = 0

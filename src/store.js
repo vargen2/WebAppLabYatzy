@@ -16,15 +16,20 @@ export default new Vuex.Store({
     showDesc: false,
     rolling: false
   },
-  setters: {
-
-  },
+  setters: {},
   mutations: {
     initGame (state) {
-      state.dices = [{ side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }, { side: 1, isInteractive: false, locked: false, rolling: false }]
+      state.dices = [
+        { side: 1, isInteractive: false, locked: false, rolling: false },
+        { side: 1, isInteractive: false, locked: false, rolling: false },
+        { side: 1, isInteractive: false, locked: false, rolling: false },
+        { side: 1, isInteractive: false, locked: false, rolling: false },
+        { side: 1, isInteractive: false, locked: false, rolling: false }
+      ]
       state.upperScores = rules.upperScores
       state.lowerScores = rules.lowerScores
-      state.totalScore = { name: 'Total',
+      state.totalScore = {
+        name: 'Total',
         description: 'Total Points',
         score: 'The sum of all points',
         dices: [],
@@ -40,7 +45,9 @@ export default new Vuex.Store({
             }
 
             return sum
-          } } }
+          }
+        }
+      }
       state.gameRound = 0
       state.maxGameRound = rules.maxGameRound
       state.rollRound = 0
@@ -58,8 +65,9 @@ export default new Vuex.Store({
       }
       state.rollRound++
       state.rolling = true
-      setTimeout(() => { state.rolling = false }
-        , 600)
+      setTimeout(() => {
+        state.rolling = false
+      }, 600)
     },
     nextRound (state) {
       this.commit('resetRound')
@@ -83,17 +91,25 @@ export default new Vuex.Store({
       }
     },
     selectUpperScore (state, index) {
-      if (state.rollRound === 0 || state.upperScores[index].dices.length > 0) {
+      if (state.rollRound === 0 || state.upperScores[index].dices.length > 0 || (state.upperScores[index].rule.nonInteractive)) {
         return
       }
-      state.upperScores[index].dices = state.dices.map(d => { return { side: d.side, isInteractive: false, locked: false } })
+      state.upperScores[index].dices = state.dices.map(d => {
+        return { side: d.side, isInteractive: false, locked: false }
+      })
       this.commit('resetRound')
     },
     selectLowerScore (state, index) {
-      if (state.rollRound === 0 || state.lowerScores[index].dices.length > 0 || !state.lowerScores[index].rule.validator(state.dices)) {
+      if (
+        state.rollRound === 0 ||
+        state.lowerScores[index].dices.length > 0
+        // ||        !state.lowerScores[index].rule.validator(state.dices)
+      ) {
         return
       }
-      state.lowerScores[index].dices = state.dices.map(d => { return { side: d.side, isInteractive: false, locked: false } })
+      state.lowerScores[index].dices = state.dices.map(d => {
+        return { side: d.side, isInteractive: false, locked: false }
+      })
       this.commit('resetRound')
     },
     showDesc (state) {
