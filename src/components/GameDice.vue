@@ -66,13 +66,15 @@ img {
 }
 .gamedice {
   line-height: 1em;
-  height: 50px;
-  width: 50px;
+  height: 40px;
+  width: 40px;
   cursor: pointer;
   box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.76);
-  border-radius: 6px;
+  border-radius: 5px;
   text-align: center;
   transition: all 0.15s ease-out;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 .gamedice:hover {

@@ -15,9 +15,14 @@ export default {
 <style scoped>
 .box{
   flex: 1;
-    height: 20px;
+    height: auto;
     border: 1px solid black;
+    border-right: 0;
     background: #eee;
+}
+
+.box:last-child {
+  border-right: 1px solid black;
 }
 
 .filled{

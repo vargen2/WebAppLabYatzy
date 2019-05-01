@@ -328,14 +328,14 @@ const twoPairs = {
 }
 
 export const upperScores = [
-  { name: 'Aces', description: '(Key 1) Any combination', score: 'The sum of dice with the number 1', dices: [], rule: aces, keyCode: 49 },
-  { name: 'Twos', description: '(Key 2) Any combination', score: 'The sum of dice with the number 2', dices: [], rule: twos, keyCode: 50 },
-  { name: 'Threes', description: '(Key 3) Any combination', score: 'The sum of dice with the number 3', dices: [], rule: threes, keyCode: 51 },
-  { name: 'Fours', description: '(Key 4) Any combination', score: 'The sum of dice with the number 4', dices: [], rule: fours, keyCode: 52 },
-  { name: 'Fives', description: '(Key 5) Any combination', score: 'The sum of dice with the number 5', dices: [], rule: fives, keyCode: 53 },
-  { name: 'Sixes', description: '(Key 6) Any combination', score: 'The sum of dice with the number 6', dices: [], rule: sixes, keyCode: 54 },
+  { name: 'Aces', description: '(Key 1) Sum of Ones', score: 'The sum of dice with the number 1', dices: [], rule: aces, keyCode: 49 },
+  { name: 'Twos', description: '(Key 2) Sum of Twos', score: 'The sum of dice with the number 2', dices: [], rule: twos, keyCode: 50 },
+  { name: 'Threes', description: '(Key 3) Sum of Threes', score: 'The sum of dice with the number 3', dices: [], rule: threes, keyCode: 51 },
+  { name: 'Fours', description: '(Key 4) Sum of Fours', score: 'The sum of dice with the number 4', dices: [], rule: fours, keyCode: 52 },
+  { name: 'Fives', description: '(Key 5) Sum of Fives', score: 'The sum of dice with the number 5', dices: [], rule: fives, keyCode: 53 },
+  { name: 'Sixes', description: '(Key 6) Sum of Sixes', score: 'The sum of dice with the number 6', dices: [], rule: sixes, keyCode: 54 },
   { name: 'Bonus',
-    description: 'If more than 63',
+    description: '50p if sum of Aces to Sixes more than 63',
     score: '50',
     dices: [],
     rule: {
@@ -356,7 +356,8 @@ export const upperScores = [
         return 0
       }
     }
-  }
+  },
+  { name: 'Yahtzee', description: '(Key L) All five same', score: '50', dices: [], rule: yahtzee, keyCode: 76 }
 ]
 
 export const lowerScores = [
@@ -367,8 +368,8 @@ export const lowerScores = [
   { name: 'Small Straight', description: '(Key G) 1-2-3-4-5', score: '15', dices: [], rule: smallStraight, keyCode: 71 },
   { name: 'Large Straight', description: '(Key H) 2-3-4-5-6', score: '20', dices: [], rule: largeStraight, keyCode: 72 },
   { name: 'Full House', description: '(Key J) Three of same, two of another', score: 'Sum of all dice', dices: [], rule: fullHouse, keyCode: 74 },
-  { name: 'Chance', description: '(Key K) Any combination', score: 'Sum of all dice', dices: [], rule: chance, keyCode: 75 },
-  { name: 'Yahtzee', description: '(Key L) All five same', score: '50', dices: [], rule: yahtzee, keyCode: 76 }
+  { name: 'Chance', description: '(Key K) Any combination', score: 'Sum of all dice', dices: [], rule: chance, keyCode: 75 }
+  
 
 ]
 

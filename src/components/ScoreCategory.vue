@@ -80,13 +80,16 @@ export default {
 .scorecategory {
   background-color: #eee;
   width: 100%;
-  height: 48px;
+  height: 44px;
+  min-height: 44px;
+  max-height: 44px;
   cursor: pointer;
   margin-bottom: 4px;
   display: flex;
   transition: background-color 0.15s linear;
   -moz-user-select: none;
   -webkit-user-select: none;
+  font-size: 0.8em;
 }
 
 .left {
@@ -135,7 +138,9 @@ export default {
 }
 
 .desctext {
-  font-size: 12px;
+  text-align: left;
+  font-size: 10px;
+  line-height: 9px;
 }
 
 .green {

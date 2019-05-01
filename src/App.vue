@@ -43,7 +43,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  margin-bottom: 8px;
 }
 
 .column {
@@ -106,7 +105,7 @@ button:active {
 
 @media screen and (min-width: 550px) {
   .row {
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
 
   .column {

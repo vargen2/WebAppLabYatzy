@@ -19,9 +19,8 @@ export default {
 </script>
 
 <style>
-
 .gameroundbar {
-    display: flex;
+  display: flex;
   flex-direction: row;
   flex-basis: 100%;
 }

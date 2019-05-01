@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row scoreCategories">
       <div class="columnNoWrap">
         <score-category
           v-for="(score, index) in upperScores"
@@ -161,6 +161,7 @@ body {
   flex-direction: column;
   margin-left: 0em;
   margin-right: 0em;
+  height: 100vh;
 }
 
 .dicerow {
@@ -171,6 +172,7 @@ body {
 
 .green {
   background-color: #8bc990;
+  flex: 0.17;
 }
 
 .avoidclicks {
@@ -179,7 +181,7 @@ body {
 
 .floating {
   position: absolute;
-margin-left: 20px;
+  margin-left: 20px;
 }
 
 .columnNoWrap {
@@ -191,6 +193,14 @@ margin-left: 20px;
 
 .totalPoints {
   margin-left: 20px;
+}
+
+.gameroundbar {
+  flex: 0.03;
+}
+
+.scoreCategories {
+  flex: 0.78;
 }
 
 @media screen and (min-width: 550px) {
