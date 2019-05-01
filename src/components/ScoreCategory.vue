@@ -2,11 +2,11 @@
   <div
     class="scorecategory"
     v-bind:class="{avoidclicks :hasDices||score.rule.nonInteractive,
-    transparent:transparent,
-    green : greenBG,
-    white: hasDices,
-    red:redBG}"
+    transparent:transparent
+
+    }"
     v-on:click="$emit('score-click')"
+    :style="dynamicBG"
   >
     <div class="left">
       <div class="title">{{score.name}}</div>
@@ -67,6 +67,16 @@ export default {
         this.suggestedPoints === 0 &&
         !this.score.rule.nonInteractive
       )
+    },
+    dynamicBG: function () {
+      var bg = '#eee'
+      if (this.greenBG || this.redBG) {
+        var res = this.suggestedPoints / this.score.rule.maxPoints
+        bg = `rgb(${(155 * (0.8 - res)) + 100},${(135 * res) + 120},80)`
+      }
+      return {
+        'background-color': bg
+      }
     }
   },
   created: function () {
@@ -165,3 +175,8 @@ export default {
   background-color: rgb(211, 101, 101);
 }
 </style>
+
+// ,
+//     green : greenBG,
+//     white: hasDices,
+//     red:redBG
