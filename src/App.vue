@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+    <Game></Game>
     <footer>
       <div class="row">
         <div class="column">
@@ -37,6 +37,16 @@
     </footer>
   </div>
 </template>
+<script>
+import Game from './components/Game.vue'
+export default {
+  name: 'app',
+  components: {
+    Game
+  }
+}
+</script>
+
 <style>
 .row {
   display: flex;
@@ -63,22 +73,6 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-#nav {
-  text-align: left;
-}
-
-#nav a {
-  margin-right: 10px;
-  height: 100%;
-  font-weight: bold;
-  text-decoration: none;
-  color: rgb(73, 73, 73);
-}
-
-#nav a.router-link-exact-active {
-  text-decoration: underline;
 }
 
 button {

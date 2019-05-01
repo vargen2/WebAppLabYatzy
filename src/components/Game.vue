@@ -4,7 +4,7 @@
     <div class="row green">
       <div class="column">
         <div class="totalPoints">Total Points: {{totalPoints}}</div>
-        <h4 class="floating" v-show="gameRound==15">GAME FINISHED, CONGRATULATIONS!</h4>
+        <h4 class="floating" v-show="gameRound==15">GAME FINISHED!<br>Refresh to start new game</h4>
         <div class="dicerow">
           <game-dice
             v-for="(dice, index) in dices"
