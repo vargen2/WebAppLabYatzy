@@ -24,5 +24,4 @@ export default {
   flex-direction: row;
   flex-basis: 100%;
 }
-
 </style>

@@ -1,7 +1,11 @@
 <template>
   <div
     class="scorecategory"
-    v-bind:class="{avoidclicks :hasDices,avoidclicks:score.rule.nonInteractive,transparent:transparent,green : !hasDices && valid &&suggestedPoints>0,blue: hasDices,red:!hasDices && rollRound>0&&suggestedPoints==0}"
+    v-bind:class="{avoidclicks :hasDices||score.rule.nonInteractive,
+    transparent:transparent,
+    green : greenBG,
+    white: hasDices,
+    red:redBG}"
     v-on:click="$emit('score-click')"
   >
     <div class="left">
@@ -19,7 +23,7 @@
         <div class="points" v-if=" hasDices ||points>0">{{points}}</div>
         <div
           class="points"
-          v-else-if="valid"
+          v-else-if="rollRound>0 && !score.rule.nonInteractive"
         >{{suggestedPoints}} / {{score.rule.maxPoints}}</div>
       </div>
     </div>
@@ -50,19 +54,25 @@ export default {
       }
       return this.score.rule.points(this.playerDices)
     },
-    valid: function () {
-      return this.rollRound > 0
-    },
     hasDices: function () {
-      return (this.score.dices && this.score.dices.length > 0)
+      return this.score.dices && this.score.dices.length > 0
+    },
+    greenBG: function () {
+      return !this.hasDices && this.rollRound > 0 && this.suggestedPoints > 0
+    },
+    redBG: function () {
+      return (
+        !this.hasDices &&
+        this.rollRound > 0 &&
+        this.suggestedPoints === 0 &&
+        !this.score.rule.nonInteractive
+      )
     }
   },
   created: function () {
     var self = this
     document.addEventListener('keyup', function (event) {
       if (self.score.keyCode) {
-        console.log(self.score.keyCode)
-        console.log(event.keyCode)
         if (event.keyCode === self.score.keyCode) {
           self.$emit('score-click')
         }
@@ -144,16 +154,14 @@ export default {
 }
 
 .green {
-  background-color:#8bc990;
+  background-color: #8bc990;
 }
 
-.blue {
-  /* background-color: rgb(102, 143, 197); */
+.white {
   background-color: #eee;
 }
 
 .red {
   background-color: rgb(211, 101, 101);
 }
-
 </style>

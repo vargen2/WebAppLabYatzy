@@ -1,6 +1,5 @@
 <template>
-  <div :class="{filled:filled}" class="box">
-  </div>
+  <div :class="{filled:filled}" class="box"></div>
 </template>
 
 <script>
@@ -13,19 +12,19 @@ export default {
 </script>
 
 <style scoped>
-.box{
+.box {
   flex: 1;
-    height: auto;
-    border: 1px solid black;
-    border-right: 0;
-    background: #eee;
+  height: auto;
+  border: 1px solid black;
+  border-right: 0;
+  background: #eee;
 }
 
 .box:last-child {
   border-right: 1px solid black;
 }
 
-.filled{
-    background: rgb(102, 143, 197);
+.filled {
+  background: rgb(102, 143, 197);
 }
 </style>
