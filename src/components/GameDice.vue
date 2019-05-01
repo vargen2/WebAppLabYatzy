@@ -17,7 +17,9 @@ export default {
   props: {
     dice: Object,
     offsetx: Number,
-    offsety: Number
+    offsety: Number,
+    rolling: Boolean,
+    rollRound: Number
   },
   data: function () {
     return { side: 2, posX: 0, posY: 0, rollIntervall: null }
@@ -27,14 +29,11 @@ export default {
       return require('@/assets/Dice-' + this.compSide + '.svg')
     },
     compSide: function () {
-      return this.rolling && !this.dice.locked ? this.side : this.dice.side
+      return this.diceRolling && !this.dice.locked ? this.side : this.dice.side
     },
-    rolling: function () {
+    diceRolling: function () {
       this.startRoll()
-      return this.$store.state.rolling
-    },
-    rollRound: function () {
-      return this.$store.state.rollRound
+      return this.rolling
     },
     startposx: function () {
       return parseInt(this.offsetx) * 70 + 150
@@ -45,15 +44,13 @@ export default {
   },
   methods: {
     startRoll: function () {
-      if (this.$store.state.rolling) {
+      if (this.rolling) {
         this.rollIntervall = setInterval(() => {
           this.side = Math.floor(Math.random() * 5) + 1
         }, 100)
-        setTimeout(this.asdf, 500)
+        var self = this
+        setTimeout(() => window.clearInterval(self.rollIntervall), 500)
       }
-    },
-    asdf: function () {
-      window.clearInterval(this.rollIntervall)
     }
   }
 }
@@ -77,16 +74,9 @@ img {
   -webkit-user-select: none;
 }
 
-.gamedice:hover {
-  transform: scale(0.95);
-  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.76);
-  /* transform: translateY(2px); */
-}
-
 .locked {
   box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.76);
   transform: scale(0.95);
-  /* transform: translateY(2px); */
 }
 
 .avoidclicks {
@@ -102,6 +92,11 @@ img {
     height: 90px;
     width: 90px;
     border-radius: 15px;
+  }
+
+  .gamedice:hover {
+    transform: scale(0.95);
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.76);
   }
 }
 </style>

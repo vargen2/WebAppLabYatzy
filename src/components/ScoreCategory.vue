@@ -1,7 +1,7 @@
 <template>
   <div
     class="scorecategory"
-    v-bind:class="{avoidclicks : score.dices.length >0,avoidclicks:score.rule.nonInteractive,transparent:transparent,green : !hasDices && valid &&suggestedPoints>0,blue: hasDices,red:!hasDices && rollRound>0&&suggestedPoints==0}"
+    v-bind:class="{avoidclicks :hasDices,avoidclicks:score.rule.nonInteractive,transparent:transparent,green : !hasDices && valid &&suggestedPoints>0,blue: hasDices,red:!hasDices && rollRound>0&&suggestedPoints==0}"
     v-on:click="$emit('score-click')"
   >
     <div class="left">
@@ -16,7 +16,7 @@
             v-bind:dice="dice"
           ></dice>
         </div>
-        <div class="points" v-if=" (score.dices && score.dices.length>0) ||points>0">{{points}}</div>
+        <div class="points" v-if=" hasDices ||points>0">{{points}}</div>
         <div
           class="points"
           v-else-if="valid"
@@ -52,7 +52,6 @@ export default {
     },
     valid: function () {
       return this.rollRound > 0
-      // && this.score.rule.validator(this.playerDices)
     },
     hasDices: function () {
       return (this.score.dices && this.score.dices.length > 0)
@@ -131,6 +130,7 @@ export default {
 
 .avoidclicks {
   pointer-events: none;
+  cursor: default;
 }
 
 .transparent {

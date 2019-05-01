@@ -369,8 +369,6 @@ export const lowerScores = [
   { name: 'Large Straight', description: '(Key H) 2-3-4-5-6', score: '20', dices: [], rule: largeStraight, keyCode: 72 },
   { name: 'Full House', description: '(Key J) Three of same, two of another', score: 'Sum of all dice', dices: [], rule: fullHouse, keyCode: 74 },
   { name: 'Chance', description: '(Key K) Any combination', score: 'Sum of all dice', dices: [], rule: chance, keyCode: 75 }
-  
-
 ]
 
 export const maxGameRound = 15

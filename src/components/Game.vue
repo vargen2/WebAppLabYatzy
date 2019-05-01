@@ -1,10 +1,8 @@
 <template>
   <div class="game">
     <game-round-bar v-bind:currentRound="gameRound" v-bind:maxRounds="15"></game-round-bar>
-
     <div class="row green">
       <div class="column">
-        <!-- <score-category class="avoidclicks" v-bind:score="totalScore" :transparent="true"></score-category> -->
         <div class="totalPoints">Total Points: {{totalPoints}}</div>
         <h4 class="floating" v-show="gameRound==15">GAME FINISHED, CONGRATULATIONS!</h4>
         <div class="dicerow">
@@ -14,15 +12,12 @@
             v-on:dice-click="lockDice(index)"
             v-bind:dice="dice"
             v-bind:offsetx="index"
+            v-bind:rolling="rolling"
+            v-bind:rollRound="rollRound"
           ></game-dice>
         </div>
         <div class="buttons">
           <roll-button :showDesc="showDesc" :rollRound="rollRound" v-on:roll="roll"/>
-          <!-- <div class="space"></div>
-          <button class="skip-button" @click="nextRound">
-            Skip
-            <span v-show="showDesc">(Key T)</span>
-          </button>-->
         </div>
       </div>
     </div>
@@ -94,9 +89,9 @@ export default {
     lowerScores: function () {
       return this.$store.state.lowerScores
     },
-    // totalScore: function () {
-    //   return this.$store.state.totalScore
-    // },
+    rolling: function () {
+      return this.$store.state.rolling
+    },
     totalPoints: function () {
       return this.$store.state.totalScore.rule.points()
     },
