@@ -106,9 +106,9 @@ button:active {
 
 @media screen and (min-width: 550px) {
   .row {
-  margin-bottom: 16px;
-}
-  
+    margin-bottom: 16px;
+  }
+
   .column {
     flex: 1;
   }

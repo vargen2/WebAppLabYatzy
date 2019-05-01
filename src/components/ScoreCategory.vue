@@ -85,6 +85,8 @@ export default {
   margin-bottom: 4px;
   display: flex;
   transition: background-color 0.15s linear;
+  -moz-user-select: none;
+  -webkit-user-select: none;
 }
 
 .left {
