@@ -25,6 +25,6 @@ export default {
 }
 
 .filled {
-  background: rgb(102, 143, 197);
+  background: rgb(160, 150, 240);
 }
 </style>

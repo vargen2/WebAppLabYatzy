@@ -26,7 +26,7 @@ export default {
   outline: none;
   background: linear-gradient(
     to right,
-    #dada73 0%,
+    rgb(160, 150, 240) 0%,
     #eee 0%,
     #eee 33%,
     #ccc 33%,
@@ -42,7 +42,7 @@ export default {
 .one {
   background: linear-gradient(
     to right,
-    #dada73 33%,
+    rgb(160, 150, 240) 33%,
     #ccc 33%,
     #ccc 34%,
     #eee 34%,
@@ -56,11 +56,11 @@ export default {
 .two {
   background: linear-gradient(
     to right,
-    #dada73 33%,
+    rgb(160, 150, 240) 33%,
     #ccc 33%,
     #ccc 34%,
-    #dada73 34%,
-    #dada73 66%,
+    rgb(160, 150, 240) 34%,
+    rgb(160, 150, 240) 66%,
     #ccc 66%,
     #ccc 67%,
     #eee 67%
@@ -70,14 +70,14 @@ export default {
 .three {
   background: linear-gradient(
     to right,
-    #dada73 33%,
+    rgb(160, 150, 240) 33%,
     #ccc 33%,
     #ccc 34%,
-    #dada73 34%,
-    #dada73 66%,
+    rgb(160, 150, 240) 34%,
+    rgb(160, 150, 240) 66%,
     #ccc 66%,
     #ccc 67%,
-    #dada73 67%
+    rgb(160, 150, 240) 67%
   );
 }
 
