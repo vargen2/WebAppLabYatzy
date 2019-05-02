@@ -2,11 +2,9 @@
   <div
     class="scorecategory"
     v-bind:class="{avoidclicks :hasDices||score.rule.nonInteractive,
-    transparent:transparent
-
-    }"
+    transparent:transparent}"
     v-on:click="$emit('score-click')"
-    :style="dynamicBG"
+    :style="backGround"
   >
     <div class="left">
       <div class="title">{{score.name}}</div>
@@ -57,22 +55,21 @@ export default {
     hasDices: function () {
       return this.score.dices && this.score.dices.length > 0
     },
-    greenBG: function () {
-      return !this.hasDices && this.rollRound > 0 && this.suggestedPoints > 0
-    },
-    redBG: function () {
-      return (
-        !this.hasDices &&
-        this.rollRound > 0 &&
-        this.suggestedPoints === 0 &&
-        !this.score.rule.nonInteractive
-      )
-    },
-    dynamicBG: function () {
+    backGround: function () {
       var bg = '#eee'
-      if (this.greenBG || this.redBG) {
+      if (!this.hasDices && this.rollRound > 0) {
         var res = this.suggestedPoints / this.score.rule.maxPoints
-        bg = `rgb(${(155 * (0.8 - res)) + 100},${(135 * res) + 120},80)`
+        if (res === 0) {
+          bg = 'rgb(220, 100, 100)'
+        } else if (res < 0.33) {
+          bg = 'rgb(220, 160, 100)'
+        } else if (res < 0.66) {
+          bg = 'rgb(210, 210, 100)'
+        } else if (res < 1) {
+          bg = 'rgb(160, 220, 100)'
+        } else {
+          bg = 'rgb(100, 220, 100)'
+        }
       }
       return {
         'background-color': bg
@@ -163,20 +160,4 @@ export default {
   line-height: 9px;
 }
 
-.green {
-  background-color: #8bc990;
-}
-
-.white {
-  background-color: #eee;
-}
-
-.red {
-  background-color: rgb(211, 101, 101);
-}
 </style>
-
-// ,
-//     green : greenBG,
-//     white: hasDices,
-//     red:redBG
