@@ -3,8 +3,8 @@
     <game-round-bar v-bind:currentRound="gameRound" v-bind:maxRounds="15"></game-round-bar>
     <div class="row green">
       <div class="column">
-        <div class="totalPoints">Total Points: {{totalPoints}}</div>
-        <h4 class="floating" v-show="gameRound==15">GAME FINISHED!<br>Refresh to start new game</h4>
+        <div class="totalPoints">Total Points: {{totalPoints}} / {{maxPoints}}</div>
+        <h4 class="floating" v-show="gameRound==maxGameRound">GAME FINISHED!<br>Refresh to start new game</h4>
         <div class="dicerow">
           <game-dice
             v-for="(dice, index) in dices"
@@ -94,6 +94,12 @@ export default {
     },
     totalPoints: function () {
       return this.$store.state.totalScore.rule.points()
+    },
+    maxPoints: function () {
+      return this.$store.state.maxPoints
+    },
+    maxGameRound: function () {
+      return this.$store.state.maxGameRound
     },
     showDesc: {
       set () {

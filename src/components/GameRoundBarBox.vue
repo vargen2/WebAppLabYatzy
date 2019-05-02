@@ -18,6 +18,7 @@ export default {
   border: 1px solid black;
   border-right: 0;
   background: #eee;
+  transition: background-color 0.15s linear;
 }
 
 .box:last-child {

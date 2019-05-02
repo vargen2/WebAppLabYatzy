@@ -372,3 +372,4 @@ export const lowerScores = [
 ]
 
 export const maxGameRound = 15
+export const maxPoints = 374

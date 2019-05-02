@@ -14,7 +14,8 @@ export default new Vuex.Store({
     maxGameRound: null,
     rollRound: null,
     showDesc: false,
-    rolling: false
+    rolling: false,
+    maxPoints: null
   },
   setters: {},
   mutations: {
@@ -43,7 +44,6 @@ export default new Vuex.Store({
             for (const score of state.lowerScores) {
               sum += score.rule.points(score.dices)
             }
-
             return sum
           }
         }
@@ -52,6 +52,7 @@ export default new Vuex.Store({
       state.maxGameRound = rules.maxGameRound
       state.rollRound = 0
       state.showDesc = false
+      state.maxPoints = rules.maxPoints
     },
     roll (state) {
       if (state.rollRound >= 3 || state.gameRound >= state.maxGameRound) {
@@ -107,7 +108,7 @@ export default new Vuex.Store({
         return { side: d.side, isInteractive: false, locked: false }
       })
       this.commit('resetRound')
-    },
+    },    
     showDesc (state) {
       state.showDesc = !state.showDesc
     }
