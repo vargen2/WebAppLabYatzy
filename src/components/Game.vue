@@ -108,9 +108,6 @@ export default {
     roll: function () {
       this.$store.commit('roll')
     },
-    nextRound: function () {
-      this.$store.commit('nextRound')
-    },
     lockDice: function (index) {
       this.$store.commit('lockDice', index)
     },
@@ -127,8 +124,16 @@ export default {
     document.addEventListener('keyup', function (event) {
       if (event.keyCode === 82) {
         self.roll()
-      } else if (event.keyCode === 84) {
-        self.nextRound()
+      } else if (event.keyCode === 49) {
+        self.lockDice(0)
+      } else if (event.keyCode === 50) {
+        self.lockDice(1)
+      } else if (event.keyCode === 51) {
+        self.lockDice(2)
+      } else if (event.keyCode === 52) {
+        self.lockDice(3)
+      } else if (event.keyCode === 53) {
+        self.lockDice(4)
       }
     })
   }

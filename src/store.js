@@ -69,9 +69,6 @@ export default new Vuex.Store({
         state.rolling = false
       }, 600)
     },
-    nextRound (state) {
-      this.commit('resetRound')
-    },
     lockDice (state, index) {
       if (state.rollRound === 0) {
         return
@@ -103,7 +100,6 @@ export default new Vuex.Store({
       if (
         state.rollRound === 0 ||
         state.lowerScores[index].dices.length > 0
-        // ||        !state.lowerScores[index].rule.validator(state.dices)
       ) {
         return
       }
