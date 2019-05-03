@@ -1,6 +1,6 @@
 <template>
   <div class="dice">
-    <img :src="image">
+    <img :src="image" />
   </div>
 </template>
 
