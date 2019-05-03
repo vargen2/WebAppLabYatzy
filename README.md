@@ -4,7 +4,7 @@ Made for Laboration 2 in course Web app at ITHS ( https://www.iths.se/ ). Object
 
 ### Status
 
-Done basically. Just some clean up and minor refactoring left to do.
+Done.
 
 ### Live Demo
 
