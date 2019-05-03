@@ -17,7 +17,6 @@ export default new Vuex.Store({
     rolling: false,
     maxPoints: null
   },
-  setters: {},
   mutations: {
     initGame (state) {
       state.dices = [
@@ -108,7 +107,7 @@ export default new Vuex.Store({
         return { side: d.side, isInteractive: false, locked: false }
       })
       this.commit('resetRound')
-    },    
+    },
     showDesc (state) {
       state.showDesc = !state.showDesc
     }
